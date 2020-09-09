@@ -20,7 +20,7 @@ import { ProtectedStudentRoute } from './ProtectedStudentRoute';
 const cache = new InMemoryCache();
 
 const uploadLink = createUploadLink({
-	uri: 'https://langdon-ims-server.herokuapp.com/',
+	uri: 'https://langdon-ims-server.herokuapp.com',
 	// uri: 'http://localhost:5000/graphql',
 	headers: {
 		'keep-alive': 'true',
