@@ -9,7 +9,9 @@ const StyledHome = styled.div`
 		flex-direction: column;
 
 		.App-logo {
-			height: 170px;
+			/* height: 170px; */
+			width: 150px;
+			margin-bottom: 15px;
 		}
 
 		.login-form {

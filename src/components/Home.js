@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { gql } from 'apollo-boost';
+import { useQuery } from 'react-apollo';
 import axios from 'axios';
 import { useDispatch } from 'redux-react-hook';
 import { withRouter } from 'react-router-dom';
-import logo from '../college-logo.svg';
+// import logo from '../college-logo.svg';
 import * as actions from '../constants/actions_types';
 import HomeStyled from './styles/StyledHome';
 
@@ -12,6 +14,29 @@ function Login(props) {
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const dispatch = useDispatch();
+
+	const GET_SCHOOL_LOGO = gql`
+		{
+			schoolInfo {
+				logo
+			}
+		}
+	`;
+
+	const { loading: loadingLogo, error: errorLogo, data: dataLogo } = useQuery(
+		GET_SCHOOL_LOGO
+	);
+
+	if (loadingLogo) {
+		return 'Loading...';
+	}
+	if (errorLogo) {
+		return 'Error!';
+	}
+
+	const logo = dataLogo.schoolInfo.logo;
+
+	console.log(logo);
 
 	const handleChange = (setter) => (e) => {
 		setter(e.target.value);
