@@ -73,14 +73,16 @@ export default function StaffProfilePic(props) {
 	const [loadingPic, setLoadingPic] = useState(false);
 	const [staffProfilePic, setStaffProfilePic] = useState();
 
-	const photo_id = props.data.staffFromId.profilePic
-		.split('/')
-		.pop()
-		.split('.')
-		.reverse()
-		.pop();
+	let photo_id = {};
 
-	console.log(props.data);
+	if (props.data.staffFromId && props.data.staffFromId.profilePic) {
+		photo_id = props.data.staffFromId.profilePic
+			.split('/')
+			.pop()
+			.split('.')
+			.reverse()
+			.pop();
+	}
 
 	// updateStudentProfilePic
 
@@ -111,7 +113,7 @@ export default function StaffProfilePic(props) {
 			{!isEditable ? (
 				<>
 					<img
-						id='profile-pic'
+						id="profile-pic"
 						src={
 							!loadingPic
 								? props.data.staffFromId.profilePic === null
@@ -119,11 +121,11 @@ export default function StaffProfilePic(props) {
 									: props.data.staffFromId.profilePic
 								: 'https://res.cloudinary.com/imperium/image/upload/c_fill,h_200,w_150/v1581344084/loading-spinner.gif'
 						}
-						alt='Staff'
+						alt="Staff"
 					/>
 					<button
-						id='react-no-print'
-						className='change-btn'
+						id="react-no-print"
+						className="change-btn"
 						onClick={(e) => setIsEditable(true)}
 					>
 						CHANGE PHOTO
@@ -132,15 +134,15 @@ export default function StaffProfilePic(props) {
 			) : (
 				<>
 					<img
-						id='profile-pic'
-						src='https://res.cloudinary.com/imperium/image/upload/c_fill,h_200,w_150/v1574791105/nouser.png'
-						alt='Staff'
+						id="profile-pic"
+						src="https://res.cloudinary.com/imperium/image/upload/c_fill,h_200,w_150/v1574791105/nouser.png"
+						alt="Staff"
 					/>
-					<div id='react-no-print' className='btn-group'>
+					<div id="react-no-print" className="btn-group">
 						<label>
-							<button className='choose-btn'>CHOOSE FILE</button>
+							<button className="choose-btn">CHOOSE FILE</button>
 							<input
-								type='file'
+								type="file"
 								onChange={(e) => {
 									setStaffProfilePic(e.target.files[0]);
 								}}
@@ -148,7 +150,7 @@ export default function StaffProfilePic(props) {
 						</label>
 
 						<button
-							className='save-btn'
+							className="save-btn"
 							onClick={() => {
 								updatePhoto({
 									variables: { profilePic: staffProfilePic },
@@ -159,7 +161,7 @@ export default function StaffProfilePic(props) {
 						>
 							SAVE
 						</button>
-						<button className='cancel-btn' onClick={() => setIsEditable(false)}>
+						<button className="cancel-btn" onClick={() => setIsEditable(false)}>
 							CANCEL
 						</button>
 					</div>

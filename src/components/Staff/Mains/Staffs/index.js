@@ -95,13 +95,13 @@ export default function StaffsView(props) {
 							setSearchTerm(e.target.value);
 						}}
 					>
-						<option value='lastname'>Last Name</option>
-						<option value='studentid'>Staff ID</option>
+						<option value="lastname">Last Name</option>
+						<option value="studentid">Staff ID</option>
 					</select>
 				</label>
 				<input
-					type='text'
-					placeholder='Search...'
+					type="text"
+					placeholder="Search..."
 					onChange={(e) => setSearch(e.target.value)}
 				/>
 				<button onClick={() => registerNewStaff()}>+ Add Staff</button>
