@@ -57,14 +57,14 @@ function Login(props) {
 			`,
 		};
 
-		// const { data } = await axios.post(
-		// 	'https://langdon-ims-server.herokuapp.com/graphql',
-		// 	requestBody
-		// );
 		const { data } = await axios.post(
-			'http://localhost:5000/graphql',
+			'https://langdon-ims-server.herokuapp.com/graphql',
 			requestBody
 		);
+		// const { data } = await axios.post(
+		// 	'http://localhost:5000/graphql',
+		// 	requestBody
+		// );
 
 		if (data.errors) {
 			setError(data.errors[0].message);
