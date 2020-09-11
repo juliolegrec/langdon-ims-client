@@ -27,6 +27,10 @@ code {
 		monospace;
 }
 
+input:disabled {
+	color: #2c3e50 !important;
+}
+
 @media print {
 	html,
 	body {

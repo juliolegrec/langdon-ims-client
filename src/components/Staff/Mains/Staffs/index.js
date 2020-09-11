@@ -81,7 +81,7 @@ export default function StaffsView(props) {
 	}
 
 	function registerNewStaff() {
-		props.history.push(`/staff/staff/register-staff`);
+		props.history.push(`/staff/admin/staff/register-staff`);
 	}
 
 	return (

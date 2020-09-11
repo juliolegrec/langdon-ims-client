@@ -30,6 +30,7 @@ import Timetable from './Mains/Timetable';
 import UserAccount from './Mains/UserAccount';
 import StaffsView from './Mains/Staffs';
 import StaffView from './Mains/Staffs/StaffView';
+import RegisterStaff from './Mains/Staffs/RegisterStaff';
 
 import styled from 'styled-components';
 
@@ -129,6 +130,11 @@ function StaffMain(props) {
 				/>
 				<Route exact path='/staff/timetable' component={Timetable} />
 				<Route exact path='/staff/user/:id' component={UserAccount} />
+				<Route
+					exact
+					path='/staff/admin/staff/register-staff'
+					component={RegisterStaff}
+				/>
 				<Route path='*' component={MainNotFound} />
 			</Switch>
 		</MainStyled>
