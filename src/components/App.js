@@ -21,23 +21,31 @@ const cache = new InMemoryCache();
 
 const production = true;
 
-let uploadLink;
+// let uploadLink;
 
-if (production) {
-	uploadLink = createUploadLink({
-		uri: 'https://langdon-ims-server.herokuapp.com/graphql',
-		headers: {
-			'keep-alive': 'true',
-		},
-	});
-} else {
-	uploadLink = createUploadLink({
-		uri: 'http://localhost:5000/graphql',
-		headers: {
-			'keep-alive': 'true',
-		},
-	});
-}
+// if (production) {
+// 	uploadLink = createUploadLink({
+// 		uri: 'https://langdon-ims-server.herokuapp.com/graphql',
+// 		headers: {
+// 			'keep-alive': 'true',
+// 		},
+// 	});
+// } else {
+// 	uploadLink = createUploadLink({
+// 		uri: 'http://localhost:5000/graphql',
+// 		headers: {
+// 			'keep-alive': 'true',
+// 		},
+// 	});
+// }
+const uploadLink = createUploadLink({
+	uri: production
+		? 'https://langdon-ims-server.herokuapp.com/graphql'
+		: 'http://localhost:5000/graphql',
+	headers: {
+		'keep-alive': 'true',
+	},
+});
 
 const defaultOptions = {
 	watchQuery: {
