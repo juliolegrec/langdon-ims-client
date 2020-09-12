@@ -39,6 +39,7 @@ const StyledHeader = styled.header`
 			margin: 10px;
 			margin-right: 0;
 		}
+
 		#user-name {
 			font-size: 1.25rem;
 			line-height: 1;

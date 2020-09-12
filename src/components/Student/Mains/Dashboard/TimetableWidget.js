@@ -1,67 +1,50 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from 'react-apollo';
-import moment from 'moment';
 import styled from 'styled-components';
 
 const TimetableStyled = styled.div`
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	height: 100px;
+	grid-template-columns: repeat(8, 1fr);
 
 	.slots {
 		display: grid;
-		grid-template-columns: auto 1fr;
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(3, auto);
 		padding: 5px;
 		height: 100%;
 		border: 1px solid #34495e;
 		cursor: pointer;
+		text-align: center;
 
 		&:hover {
 			background-color: #ecf0f1;
 		}
 
 		p:nth-child(1) {
-			font-size: 0.85rem;
 			font-weight: bold;
 			border-radius: 5px;
-			padding: 3px 3px 0;
 			color: white;
-			background-color: #3498db;
+			background-color: #9b59b6;
+			margin-bottom: 3px;
 		}
 
 		p:nth-child(2) {
-			justify-self: end;
+			font-size: 0.85rem;
 		}
 
 		p:nth-child(3) {
-			grid-column-start: 1;
-			grid-column-end: 3;
+			/* grid-column-start: 1;
+			grid-column-end: 3; */
 			font-weight: bold;
 			font-size: 1.2rem;
+			margin-top: 10px;
 		}
 	}
-`;
 
-const CalendarStyled = styled.section`
-	border: 1px solid #a0a096;
-
-	h3 {
-		width: 100%;
-		margin-bottom: 10px;
-		padding: 10px 15px;
-		background: #ccc;
-	}
-
-	ul {
-		list-style: none;
-		margin: 0;
-		padding: 0;
-
-		li {
-			padding: 10px 15px;
-		}
-	}
+	/* @media only screen and (max-width: 768px) {
+		flex
+	} */
 `;
 
 export default function TimetableWidget(props) {
@@ -134,7 +117,7 @@ export default function TimetableWidget(props) {
 			: -1
 	);
 
-	function displatTimetable(sortedTimetable) {
+	function displayTimetable(sortedTimetable) {
 		if (loading) {
 			return 'Loading...';
 		}
@@ -171,7 +154,7 @@ export default function TimetableWidget(props) {
 
 		return final.map((slot) => {
 			return (
-				<div key={slot.slotTag.substring(4, 7)} className='slots'>
+				<div key={slot.slotTag.substring(4, 7)} className="slots">
 					<p>{slot.slotTag.substring(4, 7)}</p>
 					{displayPeriodTime(slot)}
 					<p>{slot.subjectName}</p>
@@ -180,45 +163,10 @@ export default function TimetableWidget(props) {
 		});
 	}
 
-	function displaySchoolTerms() {
-		if (loading) return '...';
-		if (error) return 'Error!';
-
-		const schoolTerms = data.allSchoolTerms;
-
-		return schoolTerms.map((term) => {
-			return (
-				<li key={term._id}>
-					<strong>{term.termName}:</strong>{' '}
-					{moment(term.beginDate).format('Do MMMM YYYY')} to{' '}
-					{moment(term.endDate).format('Do MMMM YYYY')}
-				</li>
-			);
-		});
-	}
-
 	return (
 		<section>
 			<h3>Today's Timetable</h3>
-			<TimetableStyled>{displatTimetable(sortedTimetable)}</TimetableStyled>
-			<CalendarStyled>
-				<h3>Academic Year</h3>
-				<ul>{displaySchoolTerms()}</ul>
-			</CalendarStyled>
-			<CalendarStyled>
-				<h3>Exams</h3>
-				<ul>
-					<li>
-						<strong>1st term:</strong> 1st April 2019 to 12th April 2019
-					</li>
-					<li>
-						<strong>2nd term:</strong> 8th July 2019 to 19th July 2019
-					</li>
-					<li>
-						<strong>3rd term:</strong> 20th October 2019 to 31st October 2019
-					</li>
-				</ul>
-			</CalendarStyled>
+			<TimetableStyled>{displayTimetable(sortedTimetable)}</TimetableStyled>
 		</section>
 	);
 }

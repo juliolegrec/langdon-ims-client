@@ -5,6 +5,10 @@ import styled from 'styled-components';
 const TimeDayStyled = styled.div`
 	font-weight: bold;
 	margin: auto 0;
+
+	@media only screen and (max-width: 768px) {
+		display: none;
+	}
 `;
 
 export default function TimeDay() {

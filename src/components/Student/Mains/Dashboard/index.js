@@ -3,11 +3,16 @@ import { gql } from 'apollo-boost';
 import { useQuery } from 'react-apollo';
 import StyledMain from '../../styles/MainStyled';
 import TimetableWidget from './TimetableWidget';
+import Calendars from './Calendars';
 
 export default function Dashboard() {
+	const username = JSON.parse(
+		localStorage.getItem('state')
+	).sessionState.authUser.username.toString();
+
 	const STUDENT_INFO = gql`
 		{
-			findStudentFromUsername(username: "DEMLOV") {
+			findStudentFromUsername(username: "${username}") {
 				_id
 				studentID
 				firstName
@@ -38,6 +43,7 @@ export default function Dashboard() {
 		<StyledMain>
 			<h2>Dashboard</h2>
 			<TimetableWidget classID={studentData.classID} />
+			<Calendars />
 		</StyledMain>
 	);
 }
