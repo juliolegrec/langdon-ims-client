@@ -57,14 +57,14 @@ function Login(props) {
 			`,
 		};
 
-		// const { data } = await axios.post(
-		// 	'https://langdon-ims-server.herokuapp.com/graphql',
-		// 	requestBody
-		// );
 		const { data } = await axios.post(
-			'http://localhost:5000/graphql',
+			'https://langdon-ims-server.herokuapp.com/graphql',
 			requestBody
 		);
+		// const { data } = await axios.post(
+		// 	'http://localhost:5000/graphql',
+		// 	requestBody
+		// );
 
 		if (data.errors) {
 			setError(data.errors[0].message);
@@ -109,31 +109,31 @@ function Login(props) {
 	};
 
 	return (
-		<HomeStyled className='home'>
-			<img src={logo} className='App-logo' alt='logo' />
-			<div className='login-form'>
+		<HomeStyled className="home">
+			<img src={logo} className="App-logo" alt="logo" />
+			<div className="login-form">
 				<h1>Login</h1>
 				<form onSubmit={login}>
-					<label htmlFor='username'>Username</label>
+					<label htmlFor="username">Username</label>
 					<input
-						type='text'
-						id='username'
-						className='form-input'
+						type="text"
+						id="username"
+						className="form-input"
 						onChange={handleChange(setUsername)}
 						required
 					/>
-					<label htmlFor='password'>Password</label>
+					<label htmlFor="password">Password</label>
 					<input
-						type='password'
-						id='password'
-						className='form-input'
+						type="password"
+						id="password"
+						className="form-input"
 						onChange={handleChange(setPassword)}
 						required
 					/>
-					<button type='submit' className='submit-button'>
+					<button type="submit" className="submit-button">
 						{loading ? 'Verifying...' : 'Submit'}
 					</button>
-					<p className='error-msg'>{error || ''}</p>
+					<p className="error-msg">{error || ''}</p>
 				</form>
 			</div>
 		</HomeStyled>
