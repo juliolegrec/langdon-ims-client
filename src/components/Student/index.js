@@ -1,19 +1,31 @@
 import React from 'react';
 import Navigation from '../Navigation';
 import Header from '../Header';
-// import Main from '../Main';
-import './Student.css';
+import StudentMain from './StudentMain';
+import styled from 'styled-components';
+import './styles/Student.css';
 
-function Staff() {
+const FullViewStyled = styled.div`
+	display: grid;
+	grid-template-columns: auto 1fr;
+`;
+
+const StyledAside = styled.aside`
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 50px 1fr;
+`;
+
+export default function Student() {
+	let state = JSON.parse(localStorage.getItem('state'));
+	let { role } = state.sessionState.authUser;
 	return (
-		<div className="staff-view">
-			<Navigation />
-			<aside>
+		<FullViewStyled>
+			<Navigation role={role} />
+			<StyledAside>
 				<Header />
-				<h1>Student view</h1>
-			</aside>
-		</div>
+				<StudentMain role={role} />
+			</StyledAside>
+		</FullViewStyled>
 	);
 }
-
-export default Staff;

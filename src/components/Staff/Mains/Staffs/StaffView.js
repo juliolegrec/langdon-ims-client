@@ -189,7 +189,7 @@ export default function StaffView(props) {
 	return (
 		<StyledMain>
 			<BackButtonStyled
-				id="react-no-print"
+				id='react-no-print'
 				onClick={() => {
 					props.history.push('/staff/admin/staffs');
 				}}
@@ -208,8 +208,8 @@ export default function StaffView(props) {
 					<LoadingImage>
 						<img
 							style={{ position: 'absolute' }}
-							src="https://res.cloudinary.com/imperium/image/upload/v1581344084/loading-spinner.gif"
-							alt="loading"
+							src='https://res.cloudinary.com/imperium/image/upload/v1581344084/loading-spinner.gif'
+							alt='loading'
 						/>
 					</LoadingImage>
 				) : (
@@ -221,7 +221,7 @@ export default function StaffView(props) {
 						<label>
 							First Name:&nbsp;
 							<input
-								type="text"
+								type='text'
 								defaultValue={staffPersoInfo.firstName || staffData.firstName}
 								disabled={isEditable ? null : 'disabled'}
 								onChange={(e) =>
@@ -237,7 +237,7 @@ export default function StaffView(props) {
 						<label>
 							Last Name:&nbsp;
 							<input
-								type="text"
+								type='text'
 								defaultValue={staffPersoInfo.lastName || staffData.lastName}
 								disabled={isEditable ? null : 'disabled'}
 								onChange={(e) =>
@@ -253,7 +253,7 @@ export default function StaffView(props) {
 						<label>
 							Gender:&nbsp;
 							<input
-								type="text"
+								type='text'
 								defaultValue={staffPersoInfo.gender || staffData.gender}
 								disabled={isEditable ? null : 'disabled'}
 								onChange={(e) =>
@@ -269,9 +269,9 @@ export default function StaffView(props) {
 						<label>
 							Date of Birth:&nbsp;
 							<input
-								type="date"
+								type='date'
 								defaultValue={
-									moment(staffPersoInfo.dob).format('YYYY-MM-DD') ||
+									staffPersoInfo.dob ||
 									moment(staffData.dob).format('YYYY-MM-DD')
 								}
 								disabled={isEditable ? null : 'disabled'}
@@ -288,7 +288,7 @@ export default function StaffView(props) {
 						<label>
 							Street Address:&nbsp;
 							<input
-								type="text"
+								type='text'
 								defaultValue={
 									staffPersoInfo.streetAddress || staffData.streetAddress
 								}
@@ -306,7 +306,7 @@ export default function StaffView(props) {
 						<label>
 							City:&nbsp;
 							<input
-								type="text"
+								type='text'
 								defaultValue={staffPersoInfo.city || staffData.city}
 								disabled={isEditable ? null : 'disabled'}
 								onChange={(e) =>
@@ -322,7 +322,7 @@ export default function StaffView(props) {
 						<label>
 							Zip Code:&nbsp;
 							<input
-								type="text"
+								type='text'
 								defaultValue={staffPersoInfo.zipCode || staffData.zipCode}
 								disabled={isEditable ? null : 'disabled'}
 								onChange={(e) =>
@@ -338,7 +338,7 @@ export default function StaffView(props) {
 						<label>
 							Telephone Number:&nbsp;
 							<input
-								type="text"
+								type='text'
 								defaultValue={
 									staffPersoInfo.telephoneNumber || staffData.telephoneNumber
 								}
@@ -356,7 +356,7 @@ export default function StaffView(props) {
 						<label>
 							Email Address:&nbsp;
 							<input
-								type="email"
+								type='email'
 								defaultValue={
 									staffPersoInfo.emailAddress || staffData.emailAddress
 								}
@@ -372,9 +372,9 @@ export default function StaffView(props) {
 							/>
 						</label>
 						{isEditable ? (
-							<div className="btn-group">
+							<div className='btn-group'>
 								<button
-									id="save-btn"
+									id='save-btn'
 									onClick={(e) => {
 										updateStaffInfo();
 										setIsSaving(true);
@@ -383,7 +383,7 @@ export default function StaffView(props) {
 									SAVE
 								</button>
 								<button
-									id="cancel-btn"
+									id='cancel-btn'
 									onClick={(e) => {
 										setIsEditable(false);
 										setStaffPersoInfo({});
@@ -393,8 +393,8 @@ export default function StaffView(props) {
 								</button>
 							</div>
 						) : (
-							<div className="btn-group">
-								<button id="edit-btn" onClick={(e) => setIsEditable(true)}>
+							<div className='btn-group'>
+								<button id='edit-btn' onClick={(e) => setIsEditable(true)}>
 									EDIT
 								</button>
 							</div>

@@ -19,18 +19,18 @@ import { ProtectedStudentRoute } from './ProtectedStudentRoute';
 // Instantiate required constructor fields
 const cache = new InMemoryCache();
 
-// const uploadLink = createUploadLink({
-// 	uri: 'http://localhost:5000/graphql',
-// 	headers: {
-// 		'keep-alive': 'true',
-// 	},
-// });
 const uploadLink = createUploadLink({
-	uri: 'https://langdon-ims-server.herokuapp.com/graphql',
+	uri: 'http://localhost:5000/graphql',
 	headers: {
 		'keep-alive': 'true',
 	},
 });
+// const uploadLink = createUploadLink({
+// 	uri: 'https://langdon-ims-server.herokuapp.com/graphql',
+// 	headers: {
+// 		'keep-alive': 'true',
+// 	},
+// });
 
 const defaultOptions = {
 	watchQuery: {
@@ -54,11 +54,11 @@ const App = () => {
 		<ApolloProvider client={client}>
 			<Router>
 				<Switch>
-					<Route exact path="/" component={Home} />
+					<Route exact path='/' component={Home} />
 					{/* <ProtectedAdminRoute path='/staff' component={Staff} /> */}
-					<ProtectedStaffRoute path="/staff" component={Staff} />
-					<ProtectedTeacherRoute path="/teacher" component={Teacher} />
-					<ProtectedStudentRoute path="/student" component={Student} />
+					<ProtectedStaffRoute path='/staff' component={Staff} />
+					<ProtectedTeacherRoute path='/teacher' component={Teacher} />
+					<ProtectedStudentRoute path='/student' component={Student} />
 					<Route component={NotFound} />
 				</Switch>
 			</Router>

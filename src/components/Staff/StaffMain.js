@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import MainNotFound from './Mains/MainNotFound';
+import MainNotFound from '../MainNotFound';
 import Dashboard from './Mains/Dashboard';
 import StudentsView from './Mains/StudentsView';
 import StudentView from './Mains/StudentView';
@@ -45,7 +45,7 @@ const MainStyled = styled.div`
 	}
 `;
 
-function StaffMain(props) {
+export default function StaffMain(props) {
 	return (
 		<MainStyled>
 			<Switch>
@@ -140,5 +140,3 @@ function StaffMain(props) {
 		</MainStyled>
 	);
 }
-
-export default StaffMain;

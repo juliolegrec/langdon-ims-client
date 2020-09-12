@@ -5,16 +5,17 @@ import TeacherNav from './TeacherNav';
 import StudentNav from './StudentNav';
 
 function Navigation(props) {
+	console.log(props);
 	switch (props.role) {
 		case 'ADMIN':
 		case 'STAFF':
 			return <StaffNav role={props.role} />;
 		// break;
 		case 'TEACHER':
-			return <TeacherNav />;
+			return <TeacherNav role={props.role} />;
 		// break;
 		case 'STUDENT':
-			return <StudentNav />;
+			return <StudentNav role={props.role} />;
 		// break;
 		default:
 			return <h1>Something went wrong....</h1>;

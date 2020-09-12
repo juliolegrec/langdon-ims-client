@@ -6,7 +6,7 @@ import TimeDay from './TimeDay';
 import * as actions from '../constants/actions_types';
 import StyledHeader from './styles/StyledHeader';
 import styled from 'styled-components';
-import { Image, Transformation } from 'cloudinary-react';
+// import { Image, Transformation } from 'cloudinary-react';
 // import { capitalize } from '../helpers';
 
 const NameLinkStyled = styled.a`
@@ -35,6 +35,18 @@ function Header() {
 				lastName
 				profilePic
 			}
+			findStudentFromUsername(username: "${username}") {
+				_id
+				firstName
+				lastName
+				profilePic
+			}
+			findTeacherFromUsername(username: "${username}") {
+				_id
+				firstName
+				lastName
+				profilePic
+			}
 		}
 	`;
 
@@ -46,11 +58,21 @@ function Header() {
 
 	const { loading, error, data } = useQuery(CURRENT_USER_INFO);
 
-	function displayCurrentUser(username) {
+	function displayCurrentUser(username, role) {
 		if (loading) return <p>Loading...</p>;
 		if (error) return <p>Error...</p>;
 
 		if (role === 'ADMIN') {
+			return (
+				<>
+					<NameLinkStyled>
+						<p id='user-name'>{username}</p>
+					</NameLinkStyled>
+					<p>{role}</p>
+				</>
+			);
+		}
+		if (role === 'STUDENT') {
 			return (
 				<>
 					<NameLinkStyled>
@@ -89,7 +111,7 @@ function Header() {
 						alt='User Avatar'
 					/>
 				)} */}
-				{role === 'ADMIN' ? (
+				{/* {role === 'ADMIN' ? (
 					''
 				) : (
 					<Image
@@ -108,8 +130,8 @@ function Header() {
 							crop='fill'
 						/>
 					</Image>
-				)}
-				{displayCurrentUser(username)}
+				)} */}
+				{displayCurrentUser(username, role)}
 				<button onClick={logout} className='logout-btn'>
 					logout
 				</button>

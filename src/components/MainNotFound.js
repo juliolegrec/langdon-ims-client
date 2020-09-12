@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import notFoundSvg from '../../../404.svg';
+import notFoundSvg from '../404.svg';
 
 const NotFoundStyle = styled.div`
 	width: calc(100vw - 250px);
@@ -28,7 +28,7 @@ const NotFoundStyle = styled.div`
 function NotFound() {
 	return (
 		<NotFoundStyle>
-			<img src={notFoundSvg} alt="" />
+			<img src={notFoundSvg} alt='' />
 			<h1>Oops, page does not exist</h1>
 		</NotFoundStyle>
 	);
