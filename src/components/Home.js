@@ -57,14 +57,16 @@ function Login(props) {
 			`,
 		};
 
-		const { data } = await axios.post(
-			'https://langdon-ims-server.herokuapp.com/graphql',
-			requestBody
-		);
+		// const production = false;
+
 		// const { data } = await axios.post(
-		// 	'http://localhost:5000/graphql',
+		// 	'https://langdon-ims-server.herokuapp.com/graphql',
 		// 	requestBody
 		// );
+		const { data } = await axios.post(
+			'http://localhost:5000/graphql',
+			requestBody
+		);
 
 		if (data.errors) {
 			setError(data.errors[0].message);
@@ -73,16 +75,12 @@ function Login(props) {
 			setError(null);
 			setLoading(false);
 
-			const {
-				// _id,
-				username,
-				role,
-			} = await data.data.login;
+			const { _id, username, role } = await data.data.login;
 
 			dispatch({
 				type: actions.SET_AUTH_USER,
 				authUser: {
-					// _id,
+					_id,
 					username,
 					role,
 				},

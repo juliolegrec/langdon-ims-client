@@ -19,25 +19,8 @@ import { ProtectedStudentRoute } from './ProtectedStudentRoute';
 // Instantiate required constructor fields
 const cache = new InMemoryCache();
 
-const production = true;
+const production = false;
 
-// let uploadLink;
-
-// if (production) {
-// 	uploadLink = createUploadLink({
-// 		uri: 'https://langdon-ims-server.herokuapp.com/graphql',
-// 		headers: {
-// 			'keep-alive': 'true',
-// 		},
-// 	});
-// } else {
-// 	uploadLink = createUploadLink({
-// 		uri: 'http://localhost:5000/graphql',
-// 		headers: {
-// 			'keep-alive': 'true',
-// 		},
-// 	});
-// }
 const uploadLink = createUploadLink({
 	uri: production
 		? 'https://langdon-ims-server.herokuapp.com/graphql'
