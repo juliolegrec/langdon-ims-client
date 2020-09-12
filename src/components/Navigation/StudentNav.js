@@ -6,7 +6,7 @@ import NavStyles from '../styles/NavStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faTachometerAlt,
-	// faUserGraduate,
+	faUserGraduate,
 	// faChalkboardTeacher,
 	// faTasks,
 	// faCalendarWeek,
@@ -36,7 +36,7 @@ function StudentNav() {
 		if (loading) return 'Loading...';
 		if (error) return `Error! ${error.message}`;
 
-		return <img src={data.schoolInfo.logo} alt='Logo of college' />;
+		return <img src={data.schoolInfo.logo} alt="Logo of college" />;
 	}
 
 	function schoolName() {
@@ -48,26 +48,19 @@ function StudentNav() {
 
 	return (
 		<NavStyles>
-			<div className='logo-bg'>{schoolLogo()}</div>
+			<div className="logo-bg">{schoolLogo()}</div>
 			<h3>{schoolName()}</h3>
-			<ul className='list-group'>
-				<NavLink to='/student' exact activeClassName='current'>
+			<ul className="list-group">
+				<NavLink to="/student" exact activeClassName="current">
 					<li>
 						<FontAwesomeIcon icon={faTachometerAlt} /> Dashboard
 					</li>
 				</NavLink>
-				{/* <Link to='/teachers'>
-					<li>Teachers</li>
-				</Link>
-				<Link to='/classes'>
-					<li>Classes</li>
-				</Link>
-				<Link to='/timetable'>
-					<li>Timetable</li>
-				</Link>
-				<Link to='/settings'>
-					<li>Settings</li>
-				</Link> */}
+				<NavLink to="/student/student-profile" exact activeClassName="current">
+					<li>
+						<FontAwesomeIcon icon={faUserGraduate} /> My Profile
+					</li>
+				</NavLink>
 			</ul>
 		</NavStyles>
 	);
