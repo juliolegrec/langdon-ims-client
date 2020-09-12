@@ -23,7 +23,7 @@ export default function Student() {
 		<FullViewStyled>
 			<Navigation role={role} />
 			<StyledAside>
-				<Header />
+				<Header role={role} />
 				<StudentMain role={role} />
 			</StyledAside>
 		</FullViewStyled>

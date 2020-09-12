@@ -66,7 +66,7 @@ function Header() {
 			return (
 				<>
 					<NameLinkStyled>
-						<p id='user-name'>{username}</p>
+						<p id="user-name">{username}</p>
 					</NameLinkStyled>
 					<p>{role}</p>
 				</>
@@ -76,7 +76,7 @@ function Header() {
 			return (
 				<>
 					<NameLinkStyled>
-						<p id='user-name'>{username}</p>
+						<p id="user-name">{username}</p>
 					</NameLinkStyled>
 					<p>{role}</p>
 				</>
@@ -86,7 +86,7 @@ function Header() {
 		return (
 			<>
 				<NameLinkStyled href={`/staff/user/${data.findStaffFromUsername._id}`}>
-					<p id='user-name'>
+					<p id="user-name">
 						{`${data.findStaffFromUsername.firstName} ${data.findStaffFromUsername.lastName}`}
 					</p>
 				</NameLinkStyled>
@@ -95,9 +95,9 @@ function Header() {
 		);
 	}
 	return (
-		<StyledHeader id='react-no-print'>
+		<StyledHeader id="react-no-print">
 			<TimeDay />
-			<div className='user-data'>
+			<div className="user-data">
 				{/* {role === 'ADMIN' ? (
 					''
 				) : (
@@ -132,7 +132,7 @@ function Header() {
 					</Image>
 				)} */}
 				{displayCurrentUser(username, role)}
-				<button onClick={logout} className='logout-btn'>
+				<button onClick={logout} className="logout-btn">
 					logout
 				</button>
 			</div>
@@ -140,4 +140,4 @@ function Header() {
 	);
 }
 
-export default Header;
+// export default Header;
