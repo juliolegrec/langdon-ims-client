@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from 'react-apollo';
+import PersonalDetails from './PersonalDetails';
+import GuardianDetails from './GuardianDetails';
+import SchoolClassDetails from './SchoolClassDetails';
 import { capitalize } from '../../../../helpers';
 import PersonViewStyled from '../../styles/PersonViewStyled';
+import ProfilePic from './ProfilePic';
 
 export default function StudentProfile() {
 	let state = JSON.parse(localStorage.getItem('state'));
@@ -92,17 +96,17 @@ export default function StudentProfile() {
 
 	return (
 		<PersonViewStyled>
-			<div className="person-header">
-				<h1 className="person-name">
+			<div className='person-header'>
+				<h1 className='person-name'>
 					{!editable ? (
-						<span id="firstName">{studentName.firstName} </span>
+						<span id='firstName'>{studentName.firstName} </span>
 					) : (
-						<div id="firstName">
+						<div id='firstName'>
 							<label>First Name:</label>
 							<input
-								data-content="First Name"
+								data-content='First Name'
 								className={editable ? 'editable' : ''}
-								type="text"
+								type='text'
 								value={studentName.firstName}
 								onChange={(e) => {
 									setStudentName({
@@ -114,14 +118,14 @@ export default function StudentProfile() {
 						</div>
 					)}
 					{!editable ? (
-						<span id="lastName">{studentName.lastName} </span>
+						<span id='lastName'>{studentName.lastName} </span>
 					) : (
-						<div id="lastName">
+						<div id='lastName'>
 							<label>Last Name:</label>
 							<input
-								data-content="Last Name"
+								data-content='Last Name'
 								className={editable ? 'editable' : ''}
-								type="text"
+								type='text'
 								value={studentName.lastName}
 								onChange={(e) => {
 									setStudentName({
@@ -132,14 +136,14 @@ export default function StudentProfile() {
 							/>
 						</div>
 					)}
-					<span id="studentID">
+					<span id='studentID'>
 						&#40;{data.findStudentFromUsername.studentID}&#41;
 					</span>
 					{editable ? (
 						<>
 							<span
-								id="react-no-print"
-								className="saveBtn"
+								id='react-no-print'
+								className='saveBtn'
 								onClick={(e) => {
 									updateNameInfo();
 									SaveToDB();
@@ -148,8 +152,8 @@ export default function StudentProfile() {
 								save
 							</span>
 							<span
-								id="react-no-print"
-								className="cancelBtn"
+								id='react-no-print'
+								className='cancelBtn'
 								onClick={() => cancelModif()}
 							>
 								cancel
@@ -157,8 +161,8 @@ export default function StudentProfile() {
 						</>
 					) : (
 						<span
-							id="react-no-print"
-							className="editBtn"
+							id='react-no-print'
+							className='editBtn'
 							onClick={() => setEditable(true)}
 						>
 							edit
@@ -166,6 +170,9 @@ export default function StudentProfile() {
 					)}
 				</h1>
 			</div>
+			<PersonalDetails data={data} studentID={data._id} />
+			<GuardianDetails data={data} />
+			<SchoolClassDetails data={data} studentID={data._id} />
 		</PersonViewStyled>
 	);
 }

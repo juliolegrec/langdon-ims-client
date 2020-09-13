@@ -5,10 +5,10 @@ const PersonViewStyled = styled.div`
 	max-width: 80%;
 	/* max-width: 1000px; */
 	background-color: white;
-	padding: 30px 20px;
+	padding: 5px 20px;
 	display: grid;
-	grid-template-columns: 65% 35%;
-	grid-template-rows: 50px auto;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: auto auto;
 	grid-gap: 10px;
 	border-radius: 2px;
 	position: relative;
