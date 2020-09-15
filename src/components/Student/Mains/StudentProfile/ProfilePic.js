@@ -80,9 +80,7 @@ export default function ProfilePic(props) {
 		.reverse()
 		.pop();
 
-	console.log(props.studentMongoID);
-
-	// updateStudentProfilePic
+	console.log(props);
 
 	const UPDATE_PROFILE_PIC = gql`
 		mutation UpdateStudentProfilePic($profilePic: Upload!) {

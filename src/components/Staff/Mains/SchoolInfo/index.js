@@ -218,7 +218,7 @@ export default function SchoolInfo() {
 							}
 						/>
 					</label>
-					<label>
+					{/* <label>
 						Marking System:
 						<select
 							value={schoolDetails.markingSystem || ''}
@@ -232,7 +232,7 @@ export default function SchoolInfo() {
 							<option value='GRADE'>Grade</option>
 							<option value='NUMBER'>Number</option>
 						</select>
-					</label>
+					</label> */}
 					<button type='submit'>Save</button>
 				</SettingsFormStyled>
 			</div>

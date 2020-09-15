@@ -1,167 +1,42 @@
-import React, { useState } from 'react';
-import { gql } from 'apollo-boost';
-import { useMutation } from 'react-apollo';
+import React from 'react';
 
-function GuardianDetails(props) {
-	const [guardian, setGuardian] = useState(
-		props.data.findStudentFromUsername.guardianDetails[0]
-	);
-
-	const [editable, setEditable] = useState(false);
-
-	function SaveToDB() {
-		setEditable(false);
-	}
-
-	function cancelModif() {
-		setEditable(false);
-	}
-
-	const UPDATE_GUARDIAN_INFO = gql`
-		mutation{
-			updateStudentGuardianInfo(
-				_id: "${guardian._id}"
-				firstName: "${guardian.firstName}"
-				lastName: "${guardian.lastName}"
-				relationship: "${guardian.relationship}"
-				mobilePhone: "${guardian.mobilePhone}"
-				workPhone: "${guardian.workPhone}"
-				emailAddress: "${guardian.emailAddress}"
-			) {
-				_id
-			}
-		}
-	`;
-
-	const [updateGuardianInfo] = useMutation(UPDATE_GUARDIAN_INFO);
+export default function GuardianDetails(props) {
+	// const [guardian] = useState(
+	// 	props.data.findStudentFromUsername.guardianDetails[0]
+	// );
+	const guardian = props.data.findStudentFromUsername.guardianDetails[0];
 
 	return (
 		<section>
-			<h2>
-				Guardian Details{' '}
-				{/* {editable ? (
-					<>
-						<span
-							className='saveBtn'
-							onClick={() => {
-								updateGuardianInfo();
-								SaveToDB();
-							}}
-						>
-							save
-						</span>
-						<span className='cancelBtn' onClick={() => cancelModif()}>
-							cancel
-						</span>
-					</>
-				) : (
-					<span className='editBtn' onClick={() => setEditable(true)}>
-						edit
-					</span>
-				)} */}
-			</h2>
+			<h2>Guardian Details</h2>
 			<div className='guardian-details'>
 				<form>
 					<label>
 						First Name:
-						<input
-							type='text'
-							value={guardian.firstName}
-							disabled={editable ? null : 'disabled'}
-							onChange={(e) =>
-								editable
-									? setGuardian({
-											...guardian,
-											firstName: e.target.value,
-									  })
-									: 'NDA'
-							}
-						/>
+						<input type='text' disabled value={guardian.firstName} />
 					</label>
 					<label>
 						Last Name:
-						<input
-							type='text'
-							value={guardian.lastName}
-							disabled={editable ? null : 'disabled'}
-							onChange={(e) =>
-								editable
-									? setGuardian({
-											...guardian,
-											lastName: e.target.value,
-									  })
-									: 'NDA'
-							}
-						/>
+						<input type='text' disabled value={guardian.lastName} />
 					</label>
 					<label>
 						Relationship:
-						<input
-							type='text'
-							value={guardian.relationship}
-							disabled={editable ? null : 'disabled'}
-							onChange={(e) =>
-								editable
-									? setGuardian({
-											...guardian,
-											relationship: e.target.value,
-									  })
-									: 'NDA'
-							}
-						/>
+						<input type='text' disabled value={guardian.relationship} />
 					</label>
 					<label>
 						Mobile Phone:
-						<input
-							type='text'
-							value={guardian.mobilePhone}
-							disabled={editable ? null : 'disabled'}
-							onChange={(e) =>
-								editable
-									? setGuardian({
-											...guardian,
-											mobilePhone: e.target.value,
-									  })
-									: 'NDA'
-							}
-						/>
+						<input type='text' disabled value={guardian.mobilePhone} />
 					</label>
 					<label>
 						Work Phone:
-						<input
-							type='text'
-							value={guardian.workPhone}
-							disabled={editable ? null : 'disabled'}
-							onChange={(e) =>
-								editable
-									? setGuardian({
-											...guardian,
-											workPhone: e.target.value,
-									  })
-									: 'NDA'
-							}
-						/>
+						<input type='text' disabled value={guardian.workPhone} />
 					</label>
 					<label>
 						Email Address:
-						<input
-							type='email'
-							value={guardian.emailAddress}
-							disabled={editable ? null : 'disabled'}
-							onChange={(e) =>
-								editable
-									? setGuardian({
-											...guardian,
-											emailAddress: e.target.value,
-									  })
-									: 'NDA'
-							}
-						/>
+						<input type='email' disabled value={guardian.emailAddress} />
 					</label>
 				</form>
 			</div>
 		</section>
 	);
 }
-
-export default GuardianDetails;

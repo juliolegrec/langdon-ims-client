@@ -36,7 +36,7 @@ function StudentNav() {
 		if (loading) return 'Loading...';
 		if (error) return `Error! ${error.message}`;
 
-		return <img src={data.schoolInfo.logo} alt="Logo of college" />;
+		return <img src={data.schoolInfo.logo} alt='Logo of college' />;
 	}
 
 	function schoolName() {
@@ -47,16 +47,16 @@ function StudentNav() {
 	}
 
 	return (
-		<NavStyles>
-			<div className="logo-bg">{schoolLogo()}</div>
+		<NavStyles id='react-no-print'>
+			<div className='logo-bg'>{schoolLogo()}</div>
 			<h3>{schoolName()}</h3>
-			<ul className="list-group">
-				<NavLink to="/student" exact activeClassName="current">
+			<ul className='list-group'>
+				<NavLink to='/student' exact activeClassName='current'>
 					<li>
 						<FontAwesomeIcon icon={faTachometerAlt} /> Dashboard
 					</li>
 				</NavLink>
-				<NavLink to="/student/student-profile" exact activeClassName="current">
+				<NavLink to='/student/student-profile' exact activeClassName='current'>
 					<li>
 						<FontAwesomeIcon icon={faUserGraduate} /> My Profile
 					</li>

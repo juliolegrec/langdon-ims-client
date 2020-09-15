@@ -7,7 +7,7 @@ const PersonViewStyled = styled.div`
 	background-color: white;
 	padding: 5px 20px;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: auto auto;
 	grid-template-rows: auto auto;
 	grid-gap: 10px;
 	border-radius: 2px;

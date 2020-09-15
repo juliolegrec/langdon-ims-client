@@ -5,7 +5,6 @@ import TeacherNav from './TeacherNav';
 import StudentNav from './StudentNav';
 
 export default function Navigation(props) {
-	console.log(props);
 	switch (props.role) {
 		case 'ADMIN':
 		case 'STAFF':

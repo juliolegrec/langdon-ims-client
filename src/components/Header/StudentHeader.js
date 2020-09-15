@@ -41,7 +41,7 @@ export default function StudentHeader(props) {
 				<NameLinkStyled
 					href={`/staff/user/${data.findStudentFromUsername._id}`}
 				>
-					<p id="user-name">
+					<p id='user-name'>
 						{`${data.findStudentFromUsername.firstName} ${data.findStudentFromUsername.lastName}`}
 					</p>
 				</NameLinkStyled>
@@ -56,22 +56,22 @@ export default function StudentHeader(props) {
 		localStorage.removeItem('state');
 	};
 	return (
-		<StyledHeader>
+		<StyledHeader id='react-no-print'>
 			<TimeDay />
-			<div className="user-data">
+			<div className='user-data'>
 				<Image
-					className="avatar"
-					cloudName="imperium"
+					className='avatar'
+					cloudName='imperium'
 					publicId={
 						loading || data.findStudentFromUsername.profilePic === null
 							? 'nouser.png'
 							: data.findStudentFromUsername.profilePic
 					}
 				>
-					<Transformation gravity="face" height="100" width="100" crop="fill" />
+					<Transformation gravity='face' height='100' width='100' crop='fill' />
 				</Image>
 				{displayCurrentUser(props.username, props.role)}
-				<button onClick={logout} className="logout-btn">
+				<button onClick={logout} className='logout-btn'>
 					logout
 				</button>
 			</div>

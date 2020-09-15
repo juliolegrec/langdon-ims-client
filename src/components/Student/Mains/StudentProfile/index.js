@@ -6,13 +6,13 @@ import GuardianDetails from './GuardianDetails';
 import SchoolClassDetails from './SchoolClassDetails';
 import { capitalize } from '../../../../helpers';
 import PersonViewStyled from '../../styles/PersonViewStyled';
-import ProfilePic from './ProfilePic';
+import PrintTemplate from 'react-print';
+import PrintHeader from '../../../PrintHeader';
+import TitleStyled from '../../styles/TitleStyled';
 
 export default function StudentProfile() {
 	let state = JSON.parse(localStorage.getItem('state'));
 	let { username } = state.sessionState.authUser;
-
-	console.log(username);
 
 	const STUDENT_INFO = gql`
 	{
@@ -53,8 +53,10 @@ export default function StudentProfile() {
 	const { loading, error, data } = useQuery(STUDENT_INFO);
 
 	const [editable, setEditable] = useState(false);
-	const [studentID, setStudentID] = useState('');
+	const [, setStudentID] = useState('');
 	const [studentName, setStudentName] = useState({});
+
+	const pageTitle = 'My Student Profile';
 
 	useEffect(() => {
 		setStudentName({
@@ -84,8 +86,6 @@ export default function StudentProfile() {
 		return <h1>`Error! ${error.message}`</h1>;
 	}
 
-	console.log(data);
-
 	function SaveToDB() {
 		setEditable(false);
 	}
@@ -96,6 +96,9 @@ export default function StudentProfile() {
 
 	return (
 		<PersonViewStyled>
+			<TitleStyled id='react-no-print'>
+				<button onClick={() => window.print()}>PRINT</button>
+			</TitleStyled>
 			<div className='person-header'>
 				<h1 className='person-name'>
 					{!editable ? (
@@ -171,6 +174,7 @@ export default function StudentProfile() {
 				</h1>
 			</div>
 			<PersonalDetails data={data} studentID={data._id} />
+
 			<GuardianDetails data={data} />
 			<SchoolClassDetails data={data} studentID={data._id} />
 		</PersonViewStyled>
