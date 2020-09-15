@@ -8,10 +8,10 @@ import PrintHeader from '../../PrintHeader';
 import TitleStyled from '../styles/TitleStyled';
 
 export default function Timetable() {
+	const pageTitle = 'My Timetable';
+
 	let state = JSON.parse(localStorage.getItem('state'));
 	let { username } = state.sessionState.authUser;
-
-	const pageTitle = 'My Timetable';
 
 	const STUDENT_INFO = gql`
 	{
@@ -145,14 +145,14 @@ export default function Timetable() {
 		if (loading) {
 			return (
 				<tr>
-					<td colSpan='7'>Loading</td>
+					<td colSpan="7">Loading</td>
 				</tr>
 			);
 		}
 		if (error) {
 			return (
 				<tr>
-					<td colSpan='7'>Error</td>
+					<td colSpan="7">Error</td>
 				</tr>
 			);
 		}
@@ -163,7 +163,7 @@ export default function Timetable() {
 			if (period.type === 'BREAK') {
 				return (
 					<tr key={period._id}>
-						<td colSpan='7'>
+						<td colSpan="7">
 							<strong>{period.hourName}:</strong> {period.beginTime} -{' '}
 							{period.endTime}
 						</td>
@@ -209,11 +209,11 @@ export default function Timetable() {
 
 	return (
 		<div>
-			<StyledMain id='react-no-print'>
+			<StyledMain id="react-no-print">
 				<TitleStyled>
 					<button onClick={() => window.print()}>PRINT</button>
 				</TitleStyled>
-				<h2>My Timetable</h2>
+				<h2>{pageTitle}</h2>
 				<p style={{ margin: '5mm 0' }}>
 					<strong>Grade: </strong>
 					{getClassName(classID)}
