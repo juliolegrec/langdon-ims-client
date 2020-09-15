@@ -12,7 +12,7 @@ import DataTableStyled from '../styles/DataTableStyled';
 const MainMarkings = styled.div`
 	display: grid;
 	grid-gap: 10px;
-	grid-template-columns: 30% 70%;
+	grid-template-columns: 40% 60%;
 
 	h3 {
 		text-align: center;
@@ -57,8 +57,9 @@ const AssessmentListStyle = styled.div`
 	background: #ecf0f1;
 	border: 1px solid #bdc3c7;
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr 1fr;
+	grid-template-columns: auto auto;
+	grid-template-rows: auto auto;
+	grid-gap: 10px 0;
 	font-size: 16px;
 	cursor: pointer;
 
@@ -76,19 +77,29 @@ const AssessmentListStyle = styled.div`
 		pointer-events: none;
 	}
 
-	#date-label {
-		grid-column-start: 1;
-		grid-column-end: 3;
+	#date-label,
+	#markings-label {
+		/* grid-column-start: 1;
+		grid-column-end: 3; */
 		font-size: 0.85em;
 	}
 
 	#grade-label,
 	#subject-label {
 		font-weight: bold;
-		font-size: 1.15em;
+		/* font-size: 1.15em; */
 	}
 
-	#subject-label {
+	#markings-label {
+		background-color: crimson;
+		padding: 5px 10px;
+		color: white;
+		font-weight: 700;
+		border-radius: 3px;
+	}
+
+	#subject-label,
+	#markings-label {
 		justify-self: right;
 	}
 `;
@@ -97,7 +108,7 @@ const MarksInput = styled.input`
 	text-align: center;
 	border: none;
 	background: transparent;
-	width: auto;
+	width: 70px;
 	padding: 10px 0;
 
 	&:hover {
@@ -149,6 +160,7 @@ const GET_ALL_INFOS = gql`
 			gradeClass
 			subject
 			term
+			markings
 		}
 	}
 `;
@@ -164,7 +176,7 @@ export default function AssessmentMarkings() {
 
 	const GET_STUDENTS_FROM_CLASSID = gql`
 		{
-			studentFromClassID(classID:"${selectedInfos[0]}") {
+			studentFromClassID(classID: "${selectedInfos[0]}") {
 				_id	
 				studentID
 				firstName
@@ -273,6 +285,7 @@ export default function AssessmentMarkings() {
 							{assessment.term} -{' '}
 							{moment(assessment.assessmentDate).format('DD MMM YY')}
 						</div>
+						<div id='markings-label'>Markings: {assessment.markings}</div>
 						<div id='grade-label'>Grade: {assessment.gradeClass}</div>
 						<div id='subject-label'>{assessment.subject}</div>
 					</AssessmentListStyle>
@@ -304,7 +317,11 @@ export default function AssessmentMarkings() {
 		}
 
 		return (
-			<input type='number' onChange={(e) => handleMarkChange(e, student)} />
+			<MarksInput
+				max='25'
+				type='number'
+				onChange={(e) => handleMarkChange(e, student)}
+			/>
 		);
 	}
 
@@ -398,7 +415,7 @@ export default function AssessmentMarkings() {
 						<tr>
 							<th>Student ID</th>
 							<th>Student Name</th>
-							<th>Marks</th>
+							<th style={{ width: '50px' }}>Marks</th>
 						</tr>
 					</thead>
 
@@ -436,6 +453,7 @@ export default function AssessmentMarkings() {
 						<h3>
 							STUDENTS AND MARKS
 							<SaveBtn
+								type='submit'
 								onClick={() => {
 									updateAssessmentMarks({
 										variables: { toUpdateMarkings: [...updateMarks] },

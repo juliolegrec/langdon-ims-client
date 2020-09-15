@@ -1,26 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from 'react-apollo';
 import { NavLink } from 'react-router-dom';
 import NavStyles from '../styles/NavStyles';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faTachometerAlt,
 	faUserGraduate,
 	// faChalkboardTeacher,
 	// faTasks,
-	// faCalendarWeek,
+	faCalendarWeek,
 	// faChalkboard,
 	// faBook,
 	// faCalendarAlt,
-	// faThList,
+	faThList,
 	// faSlidersH,
 	// faInfoCircle,
 	// faBusinessTime,
 	// faUserFriends,
 } from '@fortawesome/free-solid-svg-icons';
+import styled from 'styled-components';
+
+const SubmenuStyled = styled.li`
+	list-style: none;
+`;
 
 function StudentNav() {
+	const [OpenMarkingsMenu, setOpenMarkingsMenu] = useState(false);
+
+	function toggleMarkingsMenu() {
+		setOpenMarkingsMenu(!OpenMarkingsMenu);
+	}
+
 	const GET_SCHOOL_INFO = gql`
 		{
 			schoolInfo {
@@ -61,6 +73,34 @@ function StudentNav() {
 						<FontAwesomeIcon icon={faUserGraduate} /> My Profile
 					</li>
 				</NavLink>
+				<NavLink to='/student/timetable' exact activeClassName='current'>
+					<li>
+						<FontAwesomeIcon icon={faCalendarWeek} /> My Timetable
+					</li>
+				</NavLink>
+				<li className='has-submenu' onClick={toggleMarkingsMenu}>
+					<FontAwesomeIcon icon={faThList} /> My Marks <ExpandMoreIcon />
+					<ul className={OpenMarkingsMenu ? 'visible' : ''}>
+						<NavLink
+							to='/student/assessment-markings'
+							exact
+							activeClassName='current'
+						>
+							<SubmenuStyled>
+								<FontAwesomeIcon icon={faThList} /> My Assessments Marks
+							</SubmenuStyled>
+						</NavLink>
+						<NavLink
+							to='/student/exam-markings'
+							exact
+							activeClassName='current'
+						>
+							<SubmenuStyled>
+								<FontAwesomeIcon icon={faThList} /> My Exams Marks
+							</SubmenuStyled>
+						</NavLink>
+					</ul>
+				</li>
 			</ul>
 		</NavStyles>
 	);

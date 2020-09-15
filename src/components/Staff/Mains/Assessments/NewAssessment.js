@@ -150,9 +150,14 @@ export default function NewAssessment(props) {
 			return selectedDate >= beginDate && selectedDate <= endDate;
 		});
 
-		if (assessmentDate !== undefined) {
+		console.log(filteredTerms);
+
+		if (filteredTerms[0] !== undefined && assessmentDate !== undefined) {
 			return filteredTerms[0].termName;
 		}
+		// if (filteredTerms !== undefined && assessmentDate !== undefined) {
+		// 	return filteredTerms[0].termName;
+		// }
 	}
 
 	function displayClasses() {

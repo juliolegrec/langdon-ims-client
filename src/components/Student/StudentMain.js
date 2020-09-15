@@ -3,6 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import MainNotFound from '../MainNotFound';
 import Dashboard from './Mains/Dashboard';
 import StudentProfile from './Mains/StudentProfile';
+import Timetable from './Mains/Timetable';
+import AssessmentMarks from './Mains/AssessmentMarks';
 
 import styled from 'styled-components';
 
@@ -21,13 +23,19 @@ export default function StudentMain(props) {
 	return (
 		<MainStyled>
 			<Switch>
-				<Route exact path="/student/" component={Dashboard} />
+				<Route exact path='/student/' component={Dashboard} />
 				<Route
 					exact
-					path="/student/student-profile"
+					path='/student/student-profile'
 					component={StudentProfile}
 				/>
-				<Route path="*" component={MainNotFound} />
+				<Route exact path='/student/timetable' component={Timetable} />
+				<Route
+					exact
+					path='/student/assessment-markings'
+					component={AssessmentMarks}
+				/>
+				<Route path='*' component={MainNotFound} />
 			</Switch>
 		</MainStyled>
 	);

@@ -6,8 +6,8 @@ import GuardianDetails from './GuardianDetails';
 import SchoolClassDetails from './SchoolClassDetails';
 import { capitalize } from '../../../../helpers';
 import PersonViewStyled from '../../styles/PersonViewStyled';
-import PrintTemplate from 'react-print';
-import PrintHeader from '../../../PrintHeader';
+// import PrintTemplate from 'react-print';
+// import PrintHeader from '../../../PrintHeader';
 import TitleStyled from '../../styles/TitleStyled';
 
 export default function StudentProfile() {
@@ -56,7 +56,7 @@ export default function StudentProfile() {
 	const [, setStudentID] = useState('');
 	const [studentName, setStudentName] = useState({});
 
-	const pageTitle = 'My Student Profile';
+	// const pageTitle = 'My Student Profile';
 
 	useEffect(() => {
 		setStudentName({
