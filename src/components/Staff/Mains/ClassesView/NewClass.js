@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from 'react-apollo';
+import Checkbox from './Checkbox';
 import styled from 'styled-components';
 
 const StyledNewClassMain = styled.main`
@@ -17,11 +18,16 @@ const StyledNewClassMain = styled.main`
 	form {
 		max-width: 100%;
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
 		grid-gap: 10px;
 
+		fieldset {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
+
 		label {
-			margin-bottom: 15px;
+			margin: 5px 0;
 
 			input,
 			select {
@@ -33,6 +39,12 @@ const StyledNewClassMain = styled.main`
 				border: 1px solid #cccccc;
 				border-radius: 3px;
 				padding-left: 10px;
+			}
+
+			input[type='checkbox'] {
+				width: auto;
+				height: auto;
+				margin: 0 5px;
 			}
 		}
 
@@ -57,8 +69,11 @@ const StyledNewClassMain = styled.main`
 	}
 `;
 
-function NewClass(props) {
+export default function NewClass(props) {
 	const [newClassInfo, setNewClassInfo] = useState({ teacherID: '' });
+	const [subjectsState, setSubjectsState] = useState([]);
+
+	console.log(subjectsState);
 
 	const GET_ALL_TEACHERS = gql`
 		{
@@ -67,6 +82,11 @@ function NewClass(props) {
 				teacherID
 				firstName
 				lastName
+			}
+			allSubjects {
+				_id
+				subjectID
+				subjectName
 			}
 		}
 	`;
@@ -91,7 +111,45 @@ function NewClass(props) {
 
 	const [createClass] = useMutation(CREATE_CLASS);
 
-	// className, grade, capacity, teacherID
+	// function handleSubjectChange(value) {
+
+	// }
+
+	var updateSubjects = [];
+	console.log(updateSubjects);
+
+	// useEffect(() => {
+	// 	setSubjectsState(updateSubjects);
+	// }, [updateSubjects]);
+
+	function displaySubjectsList() {
+		if (loading) return <label>Loading...</label>;
+		if (error) return <label>Error!</label>;
+
+		const subjects = data.allSubjects;
+
+		// const update
+
+		return subjects.map((subject) => {
+			const subjectState = {
+				subjectID: subject.subjectID,
+				isChecked: false,
+			};
+
+			updateSubjects.push(subjectState);
+
+			return (
+				<label key={subject._id}>
+					<Checkbox
+						type='checkbox'
+						value={subject.subjectID}
+						// onChange={() => setSubjectsState([...subjectsState, subjectState])}
+					/>
+					{subject.subjectName}
+				</label>
+			);
+		});
+	}
 
 	function displayTeachersList() {
 		if (loading) return <option>Loading...</option>;
@@ -99,7 +157,7 @@ function NewClass(props) {
 
 		const teachers = data.allTeachers;
 
-		return teachers.map(teacher => {
+		return teachers.map((teacher) => {
 			return (
 				<option key={teacher._id} value={teacher.teacherID}>
 					{teacher.firstName} {teacher.lastName}
@@ -112,7 +170,7 @@ function NewClass(props) {
 		<StyledNewClassMain>
 			<h2>New Class View</h2>
 			<form
-				onSubmit={e => {
+				onSubmit={(e) => {
 					e.preventDefault();
 					createClass();
 					window.location.href = `/staff/classes`;
@@ -121,8 +179,8 @@ function NewClass(props) {
 				<label>
 					Class Name:
 					<input
-						type="text"
-						onChange={e =>
+						type='text'
+						onChange={(e) =>
 							setNewClassInfo({ ...newClassInfo, className: e.target.value })
 						}
 					/>
@@ -130,8 +188,8 @@ function NewClass(props) {
 				<label>
 					Grade:
 					<input
-						type="text"
-						onChange={e =>
+						type='text'
+						onChange={(e) =>
 							setNewClassInfo({ ...newClassInfo, grade: e.target.value })
 						}
 					/>
@@ -139,24 +197,32 @@ function NewClass(props) {
 				<label>
 					Capacity:
 					<input
-						type="text"
-						onChange={e =>
+						type='text'
+						onChange={(e) =>
 							setNewClassInfo({ ...newClassInfo, capacity: e.target.value })
 						}
 					/>
 				</label>
+				<fieldset>
+					<legend>Subjects:</legend>
+					<label>
+						<input type='checkbox' />
+						<strong>Select All</strong>
+					</label>
+					{displaySubjectsList()}
+				</fieldset>
 				<label>
 					Teacher in Charge:
 					<select
-						onChange={e =>
+						onChange={(e) =>
 							setNewClassInfo({ ...newClassInfo, teacherID: e.target.value })
 						}
 					>
-						<option value=""></option>
+						<option value=''></option>
 						{displayTeachersList()}
 					</select>
 				</label>
-				<div id="btn-group">
+				<div id='btn-group'>
 					<button>Save</button>
 					<button onClick={() => props.history.push(`/staff/classes`)}>
 						Back
@@ -166,5 +232,3 @@ function NewClass(props) {
 		</StyledNewClassMain>
 	);
 }
-
-export default NewClass;
