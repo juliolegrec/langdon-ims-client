@@ -19,7 +19,7 @@ import { ProtectedStudentRoute } from './ProtectedStudentRoute';
 // Instantiate required constructor fields
 const cache = new InMemoryCache();
 
-const production = true;
+const production = false;
 
 const uploadLink = createUploadLink({
 	uri: production

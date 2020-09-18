@@ -1,79 +1,16 @@
 import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from 'react-apollo';
-import Checkbox from './Checkbox';
-import styled from 'styled-components';
-
-const StyledNewClassMain = styled.main`
-	max-width: 800px;
-	margin: 35px auto 25px;
-	background: #fff;
-	padding: 10px 20px;
-	border-radius: 2px;
-
-	h2 {
-		margin-bottom: 10px;
-	}
-
-	form {
-		max-width: 100%;
-		display: grid;
-		grid-template-columns: 1fr 1fr 1fr;
-		grid-gap: 10px;
-
-		fieldset {
-			display: grid;
-			grid-template-columns: 1fr 1fr;
-		}
-
-		label {
-			margin: 5px 0;
-
-			input,
-			select {
-				margin-top: 10px;
-				width: 100%;
-				height: 35px;
-				font-family: 'Source Sans Pro', sans-serif;
-				font-size: 1.1rem;
-				border: 1px solid #cccccc;
-				border-radius: 3px;
-				padding-left: 10px;
-			}
-
-			input[type='checkbox'] {
-				width: auto;
-				height: auto;
-				margin: 0 5px;
-			}
-		}
-
-		button {
-			width: 100px;
-			margin: 10px 15px 15px 0;
-			grid-column-start: 1;
-			grid-column-end: 3;
-			padding: 10px 15px;
-			font-weight: bold;
-			border: 1px solid transparent;
-			font-size: 1rem;
-			background-color: #2ecc71;
-			border-radius: 3px;
-			color: white;
-			cursor: pointer;
-
-			&:nth-child(2) {
-				background: #2c3e50;
-			}
-		}
-	}
-`;
+// import Checkbox from './Checkbox';
+import StyledNewClassMain from './styles/StyledNewClassMain';
 
 export default function NewClass(props) {
-	const [newClassInfo, setNewClassInfo] = useState({ teacherID: '' });
-	const [subjectsState, setSubjectsState] = useState([]);
+	const [newClassInfo, setNewClassInfo] = useState({
+		teacherID: '',
+		subjects: [],
+	});
 
-	console.log(subjectsState);
+	console.log(newClassInfo);
 
 	const GET_ALL_TEACHERS = gql`
 		{
@@ -94,13 +31,14 @@ export default function NewClass(props) {
 	const { loading, error, data } = useQuery(GET_ALL_TEACHERS);
 
 	const CREATE_CLASS = gql`
-		mutation {
+		mutation CreateGradeClass($subjects: [String]) {
 			createGradeClass(
 				gradeClassInput: {
 					className: "${newClassInfo.className}"
 					grade: "${newClassInfo.grade}"
 					capacity: ${newClassInfo.capacity}
 					teacherID: "${newClassInfo.teacherID}"
+					subjects: $subjects
 				}
 			) {
 				_id
@@ -111,16 +49,38 @@ export default function NewClass(props) {
 
 	const [createClass] = useMutation(CREATE_CLASS);
 
-	// function handleSubjectChange(value) {
+	function addSubjectToState(subject) {
+		const existingSubjectID = newClassInfo.subjects.find(
+			(element) => element === subject.subjectID
+		);
 
-	// }
+		if (!existingSubjectID) {
+			newClassInfo.subjects.push(subject.subjectID);
+		} else {
+			const subjectIndex = newClassInfo.subjects.findIndex(
+				(element) => element === subject.subjectID
+			);
 
-	var updateSubjects = [];
-	console.log(updateSubjects);
+			newClassInfo.subjects.splice(subjectIndex, 1, subject.subjectID);
+		}
+	}
+	function removeSubjectFromState(subject) {
+		const existingSubjectID = newClassInfo.subjects.find(
+			(element) => element === subject.subjectID
+		);
 
-	// useEffect(() => {
-	// 	setSubjectsState(updateSubjects);
-	// }, [updateSubjects]);
+		if (!existingSubjectID) {
+			// newClassInfo.subjects.push(subject.subjectID);
+
+			console.log('teset');
+		} else {
+			const subjectIndex = newClassInfo.subjects.findIndex(
+				(element) => element === subject.subjectID
+			);
+
+			newClassInfo.subjects.splice(subjectIndex, 1);
+		}
+	}
 
 	function displaySubjectsList() {
 		if (loading) return <label>Loading...</label>;
@@ -128,22 +88,17 @@ export default function NewClass(props) {
 
 		const subjects = data.allSubjects;
 
-		// const update
-
 		return subjects.map((subject) => {
-			const subjectState = {
-				subjectID: subject.subjectID,
-				isChecked: false,
-			};
-
-			updateSubjects.push(subjectState);
-
 			return (
 				<label key={subject._id}>
-					<Checkbox
+					<input
 						type='checkbox'
 						value={subject.subjectID}
-						// onChange={() => setSubjectsState([...subjectsState, subjectState])}
+						onChange={(e) =>
+							e.target.checked
+								? addSubjectToState(subject)
+								: removeSubjectFromState(subject)
+						}
 					/>
 					{subject.subjectName}
 				</label>
@@ -165,14 +120,18 @@ export default function NewClass(props) {
 			);
 		});
 	}
-	console.log(newClassInfo);
+
 	return (
 		<StyledNewClassMain>
 			<h2>New Class View</h2>
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();
-					createClass();
+					createClass({
+						variables: {
+							subjects: [...newClassInfo.subjects],
+						},
+					});
 					window.location.href = `/staff/classes`;
 				}}
 			>
@@ -206,7 +165,10 @@ export default function NewClass(props) {
 				<fieldset>
 					<legend>Subjects:</legend>
 					<label>
-						<input type='checkbox' />
+						<input
+							type='checkbox'
+							// onChange={(e) => setSelectAll(!selectAll)}
+						/>
 						<strong>Select All</strong>
 					</label>
 					{displaySubjectsList()}
@@ -222,7 +184,7 @@ export default function NewClass(props) {
 						{displayTeachersList()}
 					</select>
 				</label>
-				<div id='btn-group'>
+				<div id='btn-group' style={{ marginTop: '18px' }}>
 					<button>Save</button>
 					<button onClick={() => props.history.push(`/staff/classes`)}>
 						Back

@@ -32,8 +32,6 @@ export default function StudentHeader(props) {
 
 	const { loading, error, data } = useQuery(CURRENT_USER_INFO);
 
-	console.log(data);
-
 	function displayCurrentUser(username, role) {
 		if (loading) return <p>Loading...</p>;
 		if (error) return <p>Error...</p>;
@@ -66,7 +64,6 @@ export default function StudentHeader(props) {
 		dispatch({ type: actions.SET_AUTH_USER, authUser: null });
 		localStorage.removeItem('state');
 	};
-	console.log(props);
 	return (
 		<StyledHeader id='react-no-print'>
 			<TimeDay />

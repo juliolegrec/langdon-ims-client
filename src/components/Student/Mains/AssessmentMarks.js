@@ -23,6 +23,7 @@ export default function AssessmentMarks() {
 					gradeClass
 					subject
 					term
+					markings
 				}
 			}
 			allClasses {

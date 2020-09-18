@@ -14,6 +14,7 @@ import SchoolCalendar from './Mains/SchoolCalendar';
 import ClassesView from './Mains/ClassesView';
 import NewClass from './Mains/ClassesView/NewClass';
 import UpdateClass from './Mains/ClassesView/UpdateClass';
+import ClassView from './Mains/ClassesView/ClassView';
 import SubjectsView from './Mains/SubjectsView';
 import UpdateSubject from './Mains/SubjectsView/UpdateSubject';
 import Assessments from './Mains/Assessments';
@@ -84,6 +85,7 @@ export default function StaffMain(props) {
 					path='/staff/classes/update-class/:id'
 					component={UpdateClass}
 				/>
+				<Route exact path='/staff/classes/class/:id' component={ClassView} />
 				<Route exact path='/staff/subjects' component={SubjectsView} />
 				<Route
 					exact

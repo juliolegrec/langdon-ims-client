@@ -69,7 +69,16 @@ function ClassesView(props) {
 
 	const { loading, error, data } = useQuery(GET_ALL_CLASSES);
 
-	const [deleteGradeClass] = useMutation(DELETE_CLASS);
+	const [deleteGradeClass] = useMutation(DELETE_CLASS, {
+		onCompleted: () => {
+			window.location.reload(true);
+		},
+	});
+
+	function goToClassView(e) {
+		const id = e.target.parentNode.getAttribute('id');
+		props.history.push(`/staff/classes/class/${id}`);
+	}
 
 	function displayClasses() {
 		if (loading)
@@ -106,16 +115,16 @@ function ClassesView(props) {
 						? gradeClass.formTeacher.lastName
 						: '';
 				return (
-					<tr id={gradeClass._id} key={gradeClass._id}>
+					<tr id={gradeClass._id} key={gradeClass._id} onClick={goToClassView}>
 						<td>{gradeClass.classID}</td>
 						<td>{gradeClass.grade}</td>
 						<td>{gradeClass.className}</td>
 						{/* <td>{gradeClass.numberOfStudents}</td> */}
 						<td>{gradeClass.capacity}</td>
 						<td>{`${teacherFirstName} ${teacherLastName}`}</td>
-						<ActionBtnStyled id="react-no-print">
+						<ActionBtnStyled id='react-no-print'>
 							<button
-								id="edit-btn"
+								id='edit-btn'
 								onClick={(e) => {
 									props.history.push(
 										`/staff/classes/update-class/${e.target.parentNode.parentNode.getAttribute(
@@ -128,10 +137,10 @@ function ClassesView(props) {
 							</button>
 
 							<button
-								id="delete-btn"
+								id='delete-btn'
 								onClick={(e) => {
 									setSelectedRowID(
-										e.target.parentNode.parentNode.parentNode.getAttribute('id')
+										e.target.parentNode.parentNode.getAttribute('id')
 									);
 									handleOpen();
 								}}
@@ -156,7 +165,7 @@ function ClassesView(props) {
 							{/* <th>Number of Students</th> */}
 							<th>Capacity</th>
 							<th>Teacher in Charge</th>
-							<th id="react-no-print">Actions</th>
+							<th id='react-no-print'>Actions</th>
 						</tr>
 					</thead>
 					<tbody>{displayClasses()}</tbody>
@@ -167,7 +176,7 @@ function ClassesView(props) {
 
 	return (
 		<>
-			<StyledMain id="react-no-print">
+			<StyledMain id='react-no-print'>
 				<TitleStyled>
 					<button onClick={() => window.print()}>PRINT</button>
 				</TitleStyled>
@@ -182,11 +191,10 @@ function ClassesView(props) {
 				<Modal open={open} onClose={handleClose}>
 					<StyledModal>
 						<h3>Are you sure you want to delete this class?</h3>
-						<div className="btn">
+						<div className='btn'>
 							<button
 								onClick={() => {
 									deleteGradeClass();
-									window.location.reload(true);
 									handleClose();
 									console.log(selectedRowID);
 								}}
