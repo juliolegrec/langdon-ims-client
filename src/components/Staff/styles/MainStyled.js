@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledMain = styled.main`
-	max-width: 80%;
+	max-width: 60%;
 	/* height: 100%; */
 	margin: 35px auto 25px;
 	background: #fff;
@@ -13,6 +13,10 @@ const StyledMain = styled.main`
 		margin-bottom: 10px;
 		grid-column-start: 1;
 		grid-column-end: 3;
+	}
+
+	@media only screen and (max-width: 1500px) {
+		max-width: 95%;
 	}
 `;
 

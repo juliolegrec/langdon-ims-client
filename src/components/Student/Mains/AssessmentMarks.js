@@ -20,6 +20,7 @@ export default function AssessmentMarks() {
 				}
 				assessmentInfo{
 					_id
+					assessmentDate
 					gradeClass
 					subject
 					term
@@ -79,7 +80,20 @@ export default function AssessmentMarks() {
 			});
 		});
 
-		console.log(selectedAssessmentsMarks);
+		// console.log(selectedAssessmentsMarks);
+
+		const info = [];
+
+		selectedAssessmentsMarks.map((element) =>
+			info.push({
+				date: element[0].assessmentDate,
+				term: element[0].term,
+				subject: element[0].subject,
+				markings: element.markings,
+			})
+		);
+
+		console.log(info);
 	}
 	displayAssessment();
 	// console.log(data?.allAssessmentsMarks);

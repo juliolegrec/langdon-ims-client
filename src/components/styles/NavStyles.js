@@ -93,6 +93,10 @@ const NavStyles = styled.nav`
 		background-color: red;
 		display: none;
 	}
+
+	@media only screen and (max-width: 1500px) {
+		width: 200px;
+	}
 `;
 
 export default NavStyles;

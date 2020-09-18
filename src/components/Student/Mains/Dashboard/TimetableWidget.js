@@ -150,11 +150,9 @@ export default function TimetableWidget(props) {
 			);
 		}
 
-		console.log(final);
-
 		return final.map((slot) => {
 			return (
-				<div key={slot.slotTag.substring(4, 7)} className="slots">
+				<div key={slot.slotTag.substring(4, 7)} className='slots'>
 					<p>{slot.slotTag.substring(4, 7)}</p>
 					{displayPeriodTime(slot)}
 					<p>{slot.subjectName}</p>

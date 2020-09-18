@@ -101,8 +101,14 @@ const LoadingImage = styled.div`
 	}
 `;
 
+const SelectStyled = styled.select`
+	width: 100%;
+	margin: 5px 0;
+	padding: 5px;
+`;
+
 export default function Timetable() {
-	const [selectedClass, setSelectedClass] = useState('11RED');
+	const [selectedClass, setSelectedClass] = useState('');
 	const [isEditable, setIsEditable] = useState(false);
 	const [updateSubject, setUpdateSubject] = useState([]);
 	const [loadingActive, setLoadingActive] = useState(false);
@@ -129,6 +135,11 @@ export default function Timetable() {
 				_id
 				subjectID
 				subjectName
+				teachedBy {
+					teacherID
+					firstName
+					lastName
+				}
 			}
 
 			allTeachers {
@@ -239,11 +250,11 @@ export default function Timetable() {
 							e.target.classList.add('selectedItem');
 						}}
 					>
-						<div id="grade-label">Grade: </div>
-						<div id="class-name-label">
+						<div id='grade-label'>Grade: </div>
+						<div id='class-name-label'>
 							{gradeClass.grade} {gradeClass.className}{' '}
 						</div>
-						<div id="classID-label">({gradeClass.classID})</div>
+						<div id='classID-label'>({gradeClass.classID})</div>
 					</ClassesListStyle>
 				);
 			});
@@ -296,7 +307,7 @@ export default function Timetable() {
 		}
 
 		const subjects = data.allSubjects;
-		const teachers = data.allTeachers;
+		// const teachers = data.allTeachers;
 
 		if (dataTimetable && dataTimetable.timetableFromClassID) {
 			const timetable = dataTimetable.timetableFromClassID;
@@ -309,15 +320,15 @@ export default function Timetable() {
 				const selectedSubject = subjects.find(
 					(element) => element.subjectID === existingRecord.subjectID
 				);
-				const selectedTeacher = teachers.find(
-					(element) => element.teacherID === existingRecord.teacherID
-				);
+				// const selectedTeacher = selectedSubject.teachedBy.find(
+				// 	(element) => element.teacherID === existingRecord.teacherID
+				// );
 
-				console.log(selectedSubject);
+				// const teacherr = selectedSubject.teachedBy;
 
 				return (
 					<td>
-						<select
+						<SelectStyled
 							onChange={(e) => handleSubjectInput(day, period, e.target.value)}
 							defaultValue={selectedSubject.subjectID}
 						>
@@ -328,8 +339,8 @@ export default function Timetable() {
 									</option>
 								);
 							})}
-						</select>
-						<select
+						</SelectStyled>
+						{/* <SelectStyled
 							// onChange={(e) => handleSubjectInput(day, period, e.target.value)}
 							defaultValue={selectedTeacher?.teacherID}
 						>
@@ -340,7 +351,7 @@ export default function Timetable() {
 									</option>
 								);
 							})}
-						</select>
+						</SelectStyled> */}
 					</td>
 				);
 			}
@@ -391,14 +402,14 @@ export default function Timetable() {
 		if (loading) {
 			return (
 				<tr>
-					<td colSpan="7">Loading</td>
+					<td colSpan='7'>Loading</td>
 				</tr>
 			);
 		}
 		if (error) {
 			return (
 				<tr>
-					<td colSpan="7">Error</td>
+					<td colSpan='7'>Error</td>
 				</tr>
 			);
 		}
@@ -409,7 +420,7 @@ export default function Timetable() {
 			if (period.type === 'BREAK') {
 				return (
 					<tr key={period._id}>
-						<td colSpan="7">
+						<td colSpan='7'>
 							<strong>{period.hourName}:</strong> {period.beginTime} -{' '}
 							{period.endTime}
 						</td>
@@ -465,13 +476,13 @@ export default function Timetable() {
 
 	return (
 		<div>
-			<StyledMain id="react-no-print">
+			<StyledMain id='react-no-print'>
 				{loadingActive ? (
 					<LoadingImage>
 						<img
 							style={{ position: 'absolute' }}
-							src="https://res.cloudinary.com/imperium/image/upload/v1581344084/loading-spinner.gif"
-							alt="loading"
+							src='https://res.cloudinary.com/imperium/image/upload/v1581344084/loading-spinner.gif'
+							alt='loading'
 						/>
 					</LoadingImage>
 				) : (
@@ -482,11 +493,11 @@ export default function Timetable() {
 				</TitleStyled>
 				<h2>{pageTitle}</h2>
 				<MainTimetable>
-					<div id="left-column">
+					<div id='left-column'>
 						<h3>Classes List</h3>
 						{listClasses()}
 					</div>
-					<div id="right-column">
+					<div id='right-column'>
 						<div
 							style={{
 								display: 'grid',
@@ -500,7 +511,7 @@ export default function Timetable() {
 							{isEditable ? (
 								<ButtonGroupStyle>
 									<button
-										id="save-btn"
+										id='save-btn'
 										style={{ marginRight: '10px' }}
 										onClick={() => {
 											updateTimetable({
@@ -512,13 +523,13 @@ export default function Timetable() {
 									>
 										SAVE
 									</button>
-									<button id="cancel-btn" onClick={() => setIsEditable(false)}>
+									<button id='cancel-btn' onClick={() => setIsEditable(false)}>
 										CANCEL
 									</button>
 								</ButtonGroupStyle>
 							) : (
 								<ButtonGroupStyle>
-									<button id="edit-btn" onClick={() => setIsEditable(true)}>
+									<button id='edit-btn' onClick={() => setIsEditable(true)}>
 										EDIT
 									</button>
 								</ButtonGroupStyle>

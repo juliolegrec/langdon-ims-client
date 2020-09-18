@@ -37,8 +37,6 @@ export default function Dashboard() {
 
 	const studentData = dataStudent.findStudentFromUsername;
 
-	console.log(studentData);
-
 	return (
 		<StyledMain>
 			<h2>Dashboard</h2>

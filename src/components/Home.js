@@ -35,8 +35,6 @@ function Login(props) {
 
 	const logo = dataLogo.schoolInfo.logo;
 
-	console.log(logo);
-
 	const handleChange = (setter) => (e) => {
 		setter(e.target.value);
 	};
@@ -56,8 +54,6 @@ function Login(props) {
 				}
 			`,
 		};
-
-		// const production = false;
 
 		// const { data } = await axios.post(
 		// 	'https://langdon-ims-server.herokuapp.com/graphql',
