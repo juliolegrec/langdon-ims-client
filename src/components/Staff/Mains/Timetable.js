@@ -11,7 +11,7 @@ import TitleStyled from '../styles/TitleStyled';
 const MainTimetable = styled.div`
 	display: grid;
 	grid-gap: 10px;
-	grid-template-columns: 25% 75%;
+	grid-template-columns: 15% 85%;
 
 	h3 {
 		text-align: center;
@@ -102,7 +102,7 @@ const LoadingImage = styled.div`
 `;
 
 export default function Timetable() {
-	const [selectedClass, setSelectedClass] = useState('');
+	const [selectedClass, setSelectedClass] = useState('11RED');
 	const [isEditable, setIsEditable] = useState(false);
 	const [updateSubject, setUpdateSubject] = useState([]);
 	const [loadingActive, setLoadingActive] = useState(false);
@@ -130,6 +130,17 @@ export default function Timetable() {
 				subjectID
 				subjectName
 			}
+
+			allTeachers {
+				_id
+				teacherID
+				firstName
+				lastName
+				subjectTaught {
+					subjectID
+					subjectName
+				}
+			}
 		}
 	`;
 
@@ -140,6 +151,7 @@ export default function Timetable() {
 				slots {
 					slotTag
 					subjectID
+					teacherID
 				}
 			}
 		}
@@ -177,14 +189,11 @@ export default function Timetable() {
 			return <span>Error</span>;
 		}
 		const classes = data.allClasses;
-		console.log(classes);
 
 		// if (classes && classes.classID) {
 		const selectedClass = classes.find(
 			(element) => element.classID === classID
 		);
-
-		console.log(selectedClass);
 
 		if (selectedClass !== undefined) {
 			return (
@@ -287,6 +296,7 @@ export default function Timetable() {
 		}
 
 		const subjects = data.allSubjects;
+		const teachers = data.allTeachers;
 
 		if (dataTimetable && dataTimetable.timetableFromClassID) {
 			const timetable = dataTimetable.timetableFromClassID;
@@ -299,6 +309,11 @@ export default function Timetable() {
 				const selectedSubject = subjects.find(
 					(element) => element.subjectID === existingRecord.subjectID
 				);
+				const selectedTeacher = teachers.find(
+					(element) => element.teacherID === existingRecord.teacherID
+				);
+
+				console.log(selectedSubject);
 
 				return (
 					<td>
@@ -310,6 +325,18 @@ export default function Timetable() {
 								return (
 									<option key={subject._id} value={subject.subjectID}>
 										{subject.subjectName}
+									</option>
+								);
+							})}
+						</select>
+						<select
+							// onChange={(e) => handleSubjectInput(day, period, e.target.value)}
+							defaultValue={selectedTeacher?.teacherID}
+						>
+							{teachers.map((teacher) => {
+								return (
+									<option key={teacher._id} value={teacher.teacherID}>
+										{teacher.firstName.charAt(0)}.{teacher.lastName}
 									</option>
 								);
 							})}

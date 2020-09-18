@@ -147,9 +147,13 @@ export default function ClassView(props) {
 				(element) => element === subject.subjectID
 			);
 			return (
-				<label key={subject._id}>
+				<label
+					key={subject._id}
+					className={!existingSubject && !isEditable ? 'hide' : ''}
+				>
 					<input
-						type='checkbox'
+						type="checkbox"
+						className={existingSubject && !isEditable ? 'hide' : ''}
 						defaultChecked={existingSubject ? 'checked' : ''}
 						disabled={isEditable ? '' : 'disabled'}
 						value={subject.subjectID}
@@ -194,7 +198,7 @@ export default function ClassView(props) {
 				{isEditable ? (
 					<>
 						<span
-							className='saveBtn'
+							className="saveBtn"
 							onClick={() => {
 								// updateInfo();
 								saveToDB();
@@ -204,7 +208,7 @@ export default function ClassView(props) {
 							save
 						</span>
 						<span
-							className='cancelBtn'
+							className="cancelBtn"
 							onClick={() => {
 								cancelModif();
 							}}
@@ -213,7 +217,7 @@ export default function ClassView(props) {
 						</span>
 					</>
 				) : (
-					<span className='editBtn' onClick={() => setIsEditable(true)}>
+					<span className="editBtn" onClick={() => setIsEditable(true)}>
 						edit
 					</span>
 				)}
@@ -226,20 +230,9 @@ export default function ClassView(props) {
 				}}
 			>
 				<label>
-					<strong>Class Name:</strong>
-					<input
-						type='text'
-						disabled={isEditable ? '' : 'disabled'}
-						defaultValue={updatedInfo.className}
-						onChange={(e) =>
-							setUpdatedInfo({ ...updatedInfo, className: e.target.value })
-						}
-					/>
-				</label>
-				<label>
 					<strong>Grade:</strong>
 					<input
-						type='text'
+						type="text"
 						disabled={isEditable ? '' : 'disabled'}
 						defaultValue={updatedInfo.grade}
 						onChange={(e) =>
@@ -248,9 +241,21 @@ export default function ClassView(props) {
 					/>
 				</label>
 				<label>
+					<strong>Class Name:</strong>
+					<input
+						type="text"
+						disabled={isEditable ? '' : 'disabled'}
+						defaultValue={updatedInfo.className}
+						onChange={(e) =>
+							setUpdatedInfo({ ...updatedInfo, className: e.target.value })
+						}
+					/>
+				</label>
+
+				<label>
 					<strong>Capacity:</strong>
 					<input
-						type='text'
+						type="text"
 						disabled={isEditable ? '' : 'disabled'}
 						defaultValue={updatedInfo.capacity}
 						onChange={(e) =>
@@ -271,11 +276,11 @@ export default function ClassView(props) {
 							setUpdatedInfo({ ...updatedInfo, teacherID: e.target.value })
 						}
 					>
-						<option value=''></option>
+						<option value=""></option>
 						{displayTeachersList()}
 					</select>
 				</label>
-				<div id='btn-group' style={{ marginTop: '18px' }}>
+				<div id="btn-group" style={{ marginTop: '18px' }}>
 					<button
 						onClick={() => {
 							saveToDB();

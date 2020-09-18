@@ -43,6 +43,9 @@ const StyledNewClassMain = styled.main`
 
 		label {
 			margin: 5px 0;
+			&.hide {
+				display: none;
+			}
 
 			input,
 			select {
@@ -54,6 +57,10 @@ const StyledNewClassMain = styled.main`
 				border: 1px solid #cccccc;
 				border-radius: 3px;
 				padding-left: 10px;
+
+				&.hide {
+					display: none;
+				}
 
 				&:disabled {
 					color: inherit;

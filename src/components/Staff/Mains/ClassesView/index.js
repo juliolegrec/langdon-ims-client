@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { gql } from 'apollo-boost';
-import { useQuery, useMutation } from 'react-apollo';
+import { useQuery } from 'react-apollo';
 import StyledMain from '../../styles/MainStyled';
 import styled from 'styled-components';
-import Modal from '@material-ui/core/Modal';
+// import Modal from '@material-ui/core/Modal';
 import PrintTemplate from 'react-print';
 import PrintHeader from '../../../PrintHeader';
 import TitleStyled from '../../styles/TitleStyled';
 import DataTableStyled from '../../styles/DataTableStyled';
-import ActionBtnStyled from '../../styles/ActionBtnStyled';
-import StyledModal from '../../../styles/StyledModal';
+// import ActionBtnStyled from '../../styles/ActionBtnStyled';
+// import StyledModal from '../../../styles/StyledModal';
 
 const StyledAddButton = styled.button`
 	width: 150px;
@@ -28,8 +28,8 @@ const StyledAddButton = styled.button`
 `;
 
 function ClassesView(props) {
-	const [open, setOpen] = useState(false);
-	const [selectedRowID, setSelectedRowID] = useState('');
+	// const [open, setOpen] = useState(false);
+	// const [selectedRowID, setSelectedRowID] = useState('');
 
 	const pageTitle = 'Classes List';
 
@@ -51,29 +51,29 @@ function ClassesView(props) {
 		}
 	`;
 
-	const DELETE_CLASS = gql`
-    mutation {
-      deleteGradeClass(_id: "${selectedRowID}"){
-        _id
-      }
-    }
-  `;
+	// const DELETE_CLASS = gql`
+	//   mutation {
+	//     deleteGradeClass(_id: "${selectedRowID}"){
+	//       _id
+	//     }
+	//   }
+	// `;
 
-	const handleOpen = () => {
-		setOpen(true);
-	};
+	// const handleOpen = () => {
+	// 	setOpen(true);
+	// };
 
-	const handleClose = () => {
-		setOpen(false);
-	};
+	// const handleClose = () => {
+	// 	setOpen(false);
+	// };
 
 	const { loading, error, data } = useQuery(GET_ALL_CLASSES);
 
-	const [deleteGradeClass] = useMutation(DELETE_CLASS, {
-		onCompleted: () => {
-			window.location.reload(true);
-		},
-	});
+	// const [deleteGradeClass] = useMutation(DELETE_CLASS, {
+	// 	onCompleted: () => {
+	// 		window.location.reload(true);
+	// 	},
+	// });
 
 	function goToClassView(e) {
 		const id = e.target.parentNode.getAttribute('id');
@@ -122,7 +122,7 @@ function ClassesView(props) {
 						{/* <td>{gradeClass.numberOfStudents}</td> */}
 						<td>{gradeClass.capacity}</td>
 						<td>{`${teacherFirstName} ${teacherLastName}`}</td>
-						<ActionBtnStyled id='react-no-print'>
+						{/* <ActionBtnStyled id='react-no-print'>
 							<button
 								id='edit-btn'
 								onClick={(e) => {
@@ -147,7 +147,7 @@ function ClassesView(props) {
 							>
 								DELETE
 							</button>
-						</ActionBtnStyled>
+						</ActionBtnStyled> */}
 					</tr>
 				);
 			});
@@ -165,7 +165,6 @@ function ClassesView(props) {
 							{/* <th>Number of Students</th> */}
 							<th>Capacity</th>
 							<th>Teacher in Charge</th>
-							<th id='react-no-print'>Actions</th>
 						</tr>
 					</thead>
 					<tbody>{displayClasses()}</tbody>
@@ -176,7 +175,7 @@ function ClassesView(props) {
 
 	return (
 		<>
-			<StyledMain id='react-no-print'>
+			<StyledMain id="react-no-print">
 				<TitleStyled>
 					<button onClick={() => window.print()}>PRINT</button>
 				</TitleStyled>
@@ -188,10 +187,10 @@ function ClassesView(props) {
 				</StyledAddButton>
 				{displayTable()}
 
-				<Modal open={open} onClose={handleClose}>
+				{/* <Modal open={open} onClose={handleClose}>
 					<StyledModal>
 						<h3>Are you sure you want to delete this class?</h3>
-						<div className='btn'>
+						<div className="btn">
 							<button
 								onClick={() => {
 									deleteGradeClass();
@@ -204,7 +203,7 @@ function ClassesView(props) {
 							<button onClick={handleClose}>No</button>
 						</div>
 					</StyledModal>
-				</Modal>
+				</Modal> */}
 			</StyledMain>
 			<PrintTemplate>
 				<PrintHeader pageTitle={pageTitle} />

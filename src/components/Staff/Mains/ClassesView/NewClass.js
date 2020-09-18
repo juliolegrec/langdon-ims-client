@@ -92,7 +92,7 @@ export default function NewClass(props) {
 			return (
 				<label key={subject._id}>
 					<input
-						type='checkbox'
+						type="checkbox"
 						value={subject.subjectID}
 						onChange={(e) =>
 							e.target.checked
@@ -136,27 +136,27 @@ export default function NewClass(props) {
 				}}
 			>
 				<label>
-					Class Name:
-					<input
-						type='text'
-						onChange={(e) =>
-							setNewClassInfo({ ...newClassInfo, className: e.target.value })
-						}
-					/>
-				</label>
-				<label>
 					Grade:
 					<input
-						type='text'
+						type="text"
 						onChange={(e) =>
 							setNewClassInfo({ ...newClassInfo, grade: e.target.value })
 						}
 					/>
 				</label>
 				<label>
+					Class Name:
+					<input
+						type="text"
+						onChange={(e) =>
+							setNewClassInfo({ ...newClassInfo, className: e.target.value })
+						}
+					/>
+				</label>
+				<label>
 					Capacity:
 					<input
-						type='text'
+						type="text"
 						onChange={(e) =>
 							setNewClassInfo({ ...newClassInfo, capacity: e.target.value })
 						}
@@ -164,13 +164,13 @@ export default function NewClass(props) {
 				</label>
 				<fieldset>
 					<legend>Subjects:</legend>
-					<label>
+					{/* <label>
 						<input
 							type='checkbox'
 							// onChange={(e) => setSelectAll(!selectAll)}
 						/>
 						<strong>Select All</strong>
-					</label>
+					</label> */}
 					{displaySubjectsList()}
 				</fieldset>
 				<label>
@@ -180,11 +180,11 @@ export default function NewClass(props) {
 							setNewClassInfo({ ...newClassInfo, teacherID: e.target.value })
 						}
 					>
-						<option value=''></option>
+						<option value=""></option>
 						{displayTeachersList()}
 					</select>
 				</label>
-				<div id='btn-group' style={{ marginTop: '18px' }}>
+				<div id="btn-group" style={{ marginTop: '18px' }}>
 					<button>Save</button>
 					<button onClick={() => props.history.push(`/staff/classes`)}>
 						Back
