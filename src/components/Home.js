@@ -3,6 +3,7 @@ import { gql } from 'apollo-boost';
 import { useQuery } from 'react-apollo';
 import axios from 'axios';
 import { useDispatch } from 'redux-react-hook';
+// import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../constants/actions_types';
 import HomeStyled from './styles/StyledHome';

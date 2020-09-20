@@ -66,7 +66,8 @@ export default function StudentHeader(props) {
 	};
 	return (
 		<StyledHeader id='react-no-print'>
-			<TimeDay />
+			<div></div>
+			{/* <TimeDay /> */}
 			<div className='user-data'>
 				{props.role === 'ADMIN' ? (
 					''

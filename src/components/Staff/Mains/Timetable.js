@@ -11,7 +11,7 @@ import TitleStyled from '../styles/TitleStyled';
 const MainTimetable = styled.div`
 	display: grid;
 	grid-gap: 10px;
-	grid-template-columns: 15% 85%;
+	grid-template-columns: 20% 80%;
 
 	h3 {
 		text-align: center;
@@ -320,11 +320,6 @@ export default function Timetable() {
 				const selectedSubject = subjects.find(
 					(element) => element.subjectID === existingRecord.subjectID
 				);
-				// const selectedTeacher = selectedSubject.teachedBy.find(
-				// 	(element) => element.teacherID === existingRecord.teacherID
-				// );
-
-				// const teacherr = selectedSubject.teachedBy;
 
 				return (
 					<td>
@@ -340,18 +335,6 @@ export default function Timetable() {
 								);
 							})}
 						</SelectStyled>
-						{/* <SelectStyled
-							// onChange={(e) => handleSubjectInput(day, period, e.target.value)}
-							defaultValue={selectedTeacher?.teacherID}
-						>
-							{teachers.map((teacher) => {
-								return (
-									<option key={teacher._id} value={teacher.teacherID}>
-										{teacher.firstName.charAt(0)}.{teacher.lastName}
-									</option>
-								);
-							})}
-						</SelectStyled> */}
 					</td>
 				);
 			}
