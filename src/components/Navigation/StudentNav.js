@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from 'react-apollo';
 import { NavLink } from 'react-router-dom';
 import NavStyles from '../styles/NavStyles';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faTachometerAlt,
@@ -14,25 +13,14 @@ import {
 	// faChalkboard,
 	// faBook,
 	// faCalendarAlt,
-	faThList,
+	// faThList,
 	// faSlidersH,
 	// faInfoCircle,
 	// faBusinessTime,
 	// faUserFriends,
 } from '@fortawesome/free-solid-svg-icons';
-import styled from 'styled-components';
-
-const SubmenuStyled = styled.li`
-	list-style: none;
-`;
 
 function StudentNav() {
-	const [OpenMarkingsMenu, setOpenMarkingsMenu] = useState(false);
-
-	function toggleMarkingsMenu() {
-		setOpenMarkingsMenu(!OpenMarkingsMenu);
-	}
-
 	const GET_SCHOOL_INFO = gql`
 		{
 			schoolInfo {
@@ -48,7 +36,7 @@ function StudentNav() {
 		if (loading) return 'Loading...';
 		if (error) return `Error! ${error.message}`;
 
-		return <img src={data.schoolInfo.logo} alt='Logo of college' />;
+		return <img src={data.schoolInfo.logo} alt="Logo of college" />;
 	}
 
 	function schoolName() {
@@ -59,48 +47,25 @@ function StudentNav() {
 	}
 
 	return (
-		<NavStyles id='react-no-print'>
-			<div className='logo-bg'>{schoolLogo()}</div>
+		<NavStyles id="react-no-print">
+			<div className="logo-bg">{schoolLogo()}</div>
 			<h3>{schoolName()}</h3>
-			<ul className='list-group'>
-				<NavLink to='/student' exact activeClassName='current'>
+			<ul className="list-group">
+				<NavLink to="/student" exact activeClassName="current">
 					<li>
 						<FontAwesomeIcon icon={faTachometerAlt} /> Dashboard
 					</li>
 				</NavLink>
-				<NavLink to='/student/student-profile' exact activeClassName='current'>
+				<NavLink to="/student/student-profile" exact activeClassName="current">
 					<li>
 						<FontAwesomeIcon icon={faUserGraduate} /> My Profile
 					</li>
 				</NavLink>
-				<NavLink to='/student/timetable' exact activeClassName='current'>
+				<NavLink to="/student/timetable" exact activeClassName="current">
 					<li>
 						<FontAwesomeIcon icon={faCalendarWeek} /> My Timetable
 					</li>
 				</NavLink>
-				<li className='has-submenu' onClick={toggleMarkingsMenu}>
-					<FontAwesomeIcon icon={faThList} /> My Marks <ExpandMoreIcon />
-					<ul className={OpenMarkingsMenu ? 'visible' : ''}>
-						<NavLink
-							to='/student/assessment-markings'
-							exact
-							activeClassName='current'
-						>
-							<SubmenuStyled>
-								<FontAwesomeIcon icon={faThList} /> My Assessments Marks
-							</SubmenuStyled>
-						</NavLink>
-						<NavLink
-							to='/student/exam-markings'
-							exact
-							activeClassName='current'
-						>
-							<SubmenuStyled>
-								<FontAwesomeIcon icon={faThList} /> My Exams Marks
-							</SubmenuStyled>
-						</NavLink>
-					</ul>
-				</li>
 			</ul>
 		</NavStyles>
 	);

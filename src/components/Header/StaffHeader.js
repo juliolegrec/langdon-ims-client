@@ -40,7 +40,7 @@ export default function StudentHeader(props) {
 			return (
 				<>
 					<NameLinkStyled>
-						<p id='user-name'>{username}</p>
+						<p id="user-name">{username}</p>
 					</NameLinkStyled>
 					<p>{role}</p>
 				</>
@@ -50,7 +50,7 @@ export default function StudentHeader(props) {
 		return (
 			<>
 				<NameLinkStyled href={`/staff/user/${data.findStaffFromUsername._id}`}>
-					<p id='user-name'>
+					<p id="user-name">
 						{`${data.findStaffFromUsername.firstName} ${data.findStaffFromUsername.lastName}`}
 					</p>
 				</NameLinkStyled>
@@ -65,16 +65,15 @@ export default function StudentHeader(props) {
 		localStorage.removeItem('state');
 	};
 	return (
-		<StyledHeader id='react-no-print'>
-			<div></div>
-			{/* <TimeDay /> */}
-			<div className='user-data'>
+		<StyledHeader id="react-no-print">
+			<TimeDay />
+			<div className="user-data">
 				{props.role === 'ADMIN' ? (
 					''
 				) : (
 					<Image
-						className='avatar'
-						cloudName='imperium'
+						className="avatar"
+						cloudName="imperium"
 						publicId={
 							loading || data.findStaffFromUsername.profilePic === null
 								? 'nouser.png'
@@ -82,15 +81,15 @@ export default function StudentHeader(props) {
 						}
 					>
 						<Transformation
-							gravity='face'
-							height='100'
-							width='100'
-							crop='fill'
+							gravity="face"
+							height="100"
+							width="100"
+							crop="fill"
 						/>
 					</Image>
 				)}
 				{displayCurrentUser(props.username, props.role)}
-				<button onClick={logout} className='logout-btn'>
+				<button onClick={logout} className="logout-btn">
 					logout
 				</button>
 			</div>

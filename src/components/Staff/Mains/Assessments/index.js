@@ -98,6 +98,7 @@ const GET_ALL_ASSESSMENTS = gql`
 			period
 			markings
 			subject
+			order
 		}
 	}
 `;
@@ -141,11 +142,11 @@ export default function Assessments(props) {
 
 	function filterTerm() {
 		if (loadingAssessment) {
-			return <option value='loading'>Loading...</option>;
+			return <option value="loading">Loading...</option>;
 		}
 
 		if (errorAssessment) {
-			return <option value='error'>Error!</option>;
+			return <option value="error">Error!</option>;
 		}
 
 		const assessments = dataAssessment.allAssessments;
@@ -163,11 +164,11 @@ export default function Assessments(props) {
 
 	function filterClass() {
 		if (loadingAssessment) {
-			return <option value='loading'>Loading...</option>;
+			return <option value="loading">Loading...</option>;
 		}
 
 		if (errorAssessment) {
-			return <option value='error'>Error!</option>;
+			return <option value="error">Error!</option>;
 		}
 
 		const assessments = dataAssessment.allAssessments;
@@ -189,11 +190,11 @@ export default function Assessments(props) {
 
 	function filterSubject() {
 		if (loadingAssessment) {
-			return <option value='loading'>Loading...</option>;
+			return <option value="loading">Loading...</option>;
 		}
 
 		if (errorAssessment) {
-			return <option value='error'>Error!</option>;
+			return <option value="error">Error!</option>;
 		}
 
 		const assessments = dataAssessment.allAssessments;
@@ -217,7 +218,7 @@ export default function Assessments(props) {
 	function displayAssessments() {
 		if (loadingAssessment) {
 			return (
-				<tr value='loading'>
+				<tr value="loading">
 					<td>Loading...</td>
 				</tr>
 			);
@@ -225,7 +226,7 @@ export default function Assessments(props) {
 
 		if (errorAssessment) {
 			return (
-				<tr value='error'>
+				<tr value="error">
 					<td>Error!</td>
 				</tr>
 			);
@@ -278,15 +279,32 @@ export default function Assessments(props) {
 				return a.assessmentDate < b.assessmentDate ? -1 : 1;
 			})
 			.map((assessment) => {
+				function orderSuffix(order) {
+					switch (order) {
+						case 1:
+							return <sup>st</sup>;
+						case 2:
+							return <sup>nd</sup>;
+						case 3:
+							return <sup>rd</sup>;
+						default:
+							return <sup>th</sup>;
+					}
+				}
+
 				return (
 					<tr id={assessment._id} key={assessment._id}>
-						<td>{assessment.term}</td>
+						<td>
+							{assessment.term} - {assessment.order}
+							{''}
+							{orderSuffix(assessment.order)} assessment
+						</td>
 						<td>{moment(assessment.assessmentDate).format('Do MMMM YYYY')}</td>
 						<td>{assessment.gradeClass}</td>
 						<td>{assessment.subject}</td>
 						<td>{assessment.period}</td>
 						<td>{assessment.markings}</td>
-						<ActionBtnStyled id='react-no-print'>
+						<ActionBtnStyled id="react-no-print">
 							<button
 								onClick={(e) => {
 									props.history.push(
@@ -327,7 +345,7 @@ export default function Assessments(props) {
 							<th>Subject</th>
 							<th>Period</th>
 							<th>Marking</th>
-							<th id='react-no-print'>Action</th>
+							<th id="react-no-print">Action</th>
 						</tr>
 					</thead>
 					<tbody>{displayAssessments()}</tbody>
@@ -338,7 +356,7 @@ export default function Assessments(props) {
 
 	return (
 		<>
-			<StyledMain id='react-no-print'>
+			<StyledMain id="react-no-print">
 				<TitleStyled>
 					<button onClick={() => window.print()}>PRINT</button>
 				</TitleStyled>
@@ -347,20 +365,20 @@ export default function Assessments(props) {
 					<form>
 						<label>
 							<select onChange={(e) => setselectedTerm(e.target.value)}>
-								<option value='undefined'>Select Term...</option>
+								<option value="undefined">Select Term...</option>
 								{filterTerm()}
 							</select>
 						</label>
 						<label>
 							<select onChange={(e) => setSelectedClass(e.target.value)}>
-								<option value='undefined'>Select Class...</option>
+								<option value="undefined">Select Class...</option>
 								{filterClass()}
 							</select>
 						</label>
 
 						<label>
 							<select onChange={(e) => setSelectedSubject(e.target.value)}>
-								<option value='undefined'>Select Subject...</option>
+								<option value="undefined">Select Subject...</option>
 								{filterSubject()}
 							</select>
 						</label>
@@ -372,7 +390,7 @@ export default function Assessments(props) {
 				<Modal open={open} onClose={handleClose}>
 					<StyledModal>
 						<h3>Are you sure you want to delete this class?</h3>
-						<div className='btn'>
+						<div className="btn">
 							<button
 								onClick={() => {
 									deleteAssessment();

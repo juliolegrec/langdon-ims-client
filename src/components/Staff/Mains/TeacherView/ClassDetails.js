@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import { gql } from 'apollo-boost';
-// import { useMutation } from 'react-apollo';
 import styled from 'styled-components';
 
 const ClassDetailsStyled = styled.div`
@@ -12,44 +10,14 @@ const ClassDetailsStyled = styled.div`
 `;
 
 function ClassDetails(props) {
-	const [editable, setEditable] = useState(false);
 	const [classAssigned] = useState(props.data.teacherFromId.classAssigned);
 	const [subjectTeaching] = useState(props.data.teacherFromId.subjectTaught);
 
-	function SaveToDB() {
-		setEditable(false);
-	}
-
-	function cancelModif() {
-		setEditable(false);
-	}
-
 	return (
 		<section>
-			<h2>
-				Class Details{' '}
-				{editable ? (
-					<>
-						<span
-							className='saveBtn'
-							onClick={() => {
-								SaveToDB();
-							}}
-						>
-							save
-						</span>
-						<span className='cancelBtn' onClick={() => cancelModif()}>
-							cancel
-						</span>
-					</>
-				) : (
-					<span className='editBtn' onClick={() => setEditable(true)}>
-						edit
-					</span>
-				)}
-			</h2>
+			<h2>Class Details </h2>
 			<ClassDetailsStyled>
-				<div id='class-assigned'>
+				<div id="class-assigned">
 					<h3>Class(es) assigned:</h3>
 					<ul>
 						{classAssigned.map((classAssign) => (
@@ -59,7 +27,7 @@ function ClassDetails(props) {
 						))}
 					</ul>
 				</div>
-				<div id='subject-teaching'>
+				<div id="subject-teaching">
 					<h3>Subject(s) teaching:</h3>
 					<ul>
 						{subjectTeaching.map((subject) => (

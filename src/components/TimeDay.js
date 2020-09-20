@@ -16,7 +16,7 @@ export default function TimeDay() {
 
 	useEffect(() => {
 		setInterval(() => {
-			setTime(moment().format('D MMM YYYY HH:mm:ss'));
+			setTime(moment().format('D MMM YYYY HH:mm'));
 		}, 1000);
 	});
 
