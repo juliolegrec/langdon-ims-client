@@ -2,14 +2,8 @@ import React, { useState } from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from 'react-apollo';
 import styled from 'styled-components';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import DeleteIcon from '@material-ui/icons/Delete';
+import DataTableStyled from '../styles/DataTableStyled';
 import moment from 'moment';
 
 const SchoolCalendarMainStyled = styled.main`
@@ -103,35 +97,31 @@ function SchoolCalendar() {
 	function displaySchoolTerms() {
 		if (loading)
 			return (
-				<TableRow>
-					<TableCell>Loading...</TableCell>
-				</TableRow>
+				<tr>
+					<td>Loading...</td>
+				</tr>
 			);
 		if (error)
 			return (
-				<TableRow>
-					<TableCell>{error.message}</TableCell>
-				</TableRow>
+				<tr>
+					<td>{error.message}</td>
+				</tr>
 			);
 
 		console.log(data);
 
 		const allSchoolTerms = data.allSchoolTerms;
 
-		return allSchoolTerms.map(schoolTerm => {
+		return allSchoolTerms.map((schoolTerm) => {
 			return (
-				<TableRow hover={true} id={schoolTerm._id} key={schoolTerm._id}>
-					<TableCell>{schoolTerm.termName}</TableCell>
-					{/* <TableCell>{schoolTerm.beginDate}</TableCell> */}
-					<TableCell>
-						{moment(schoolTerm.beginDate).format('Do MMMM YYYY')}
-					</TableCell>
-					<TableCell>
-						{moment(schoolTerm.endDate).format('Do MMMM YYYY')}
-					</TableCell>
-					<TableCell>
+				<tr hover={true} id={schoolTerm._id} key={schoolTerm._id}>
+					<td>{schoolTerm.termName}</td>
+					{/* <td>{schoolTerm.beginDate}</td> */}
+					<td>{moment(schoolTerm.beginDate).format('Do MMMM YYYY')}</td>
+					<td>{moment(schoolTerm.endDate).format('Do MMMM YYYY')}</td>
+					<td>
 						<DeleteIcon
-							onClick={e => {
+							onClick={(e) => {
 								deleteSchoolTerm({
 									variables: {
 										_id: e.target.parentNode.parentNode.parentNode.getAttribute(
@@ -142,8 +132,8 @@ function SchoolCalendar() {
 								window.location.reload();
 							}}
 						/>
-					</TableCell>
-				</TableRow>
+					</td>
+				</tr>
 			);
 		});
 	}
@@ -163,7 +153,7 @@ function SchoolCalendar() {
 			<h2>School Calendar</h2>
 			<section>
 				<form
-					onSubmit={e => {
+					onSubmit={(e) => {
 						e.preventDefault();
 						createSchoolTerm();
 						window.location.reload();
@@ -174,7 +164,7 @@ function SchoolCalendar() {
 						<input
 							type="text"
 							value={schoolTerm.termName || ''}
-							onChange={e =>
+							onChange={(e) =>
 								setSchoolTerm({ ...schoolTerm, termName: e.target.value })
 							}
 						/>
@@ -184,7 +174,7 @@ function SchoolCalendar() {
 						<input
 							type="date"
 							value={schoolTerm.beginDate || ''}
-							onChange={e =>
+							onChange={(e) =>
 								setSchoolTerm({ ...schoolTerm, beginDate: e.target.value })
 							}
 						/>
@@ -194,7 +184,7 @@ function SchoolCalendar() {
 						<input
 							type="date"
 							value={schoolTerm.endDate || ''}
-							onChange={e =>
+							onChange={(e) =>
 								setSchoolTerm({ ...schoolTerm, endDate: e.target.value })
 							}
 						/>
@@ -203,19 +193,19 @@ function SchoolCalendar() {
 				</form>
 			</section>
 			<section className="term-table">
-				<TableContainer component={Paper}>
-					<Table>
-						<TableHead>
-							<TableRow>
-								<TableCell>Term Name</TableCell>
-								<TableCell>Begin Date</TableCell>
-								<TableCell>End Date</TableCell>
-								<TableCell>Action</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>{displaySchoolTerms()}</TableBody>
-					</Table>
-				</TableContainer>
+				<DataTableStyled>
+					<table>
+						<thead>
+							<tr>
+								<th>Term Name</th>
+								<th>Begin Date</th>
+								<th>End Date</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>{displaySchoolTerms()}</tbody>
+					</table>
+				</DataTableStyled>
 			</section>
 		</SchoolCalendarMainStyled>
 	);

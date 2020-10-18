@@ -52,11 +52,11 @@ const App = () => {
 		<ApolloProvider client={client}>
 			<Router>
 				<Switch>
-					<Route exact path='/' component={Home} />
+					<Route exact path="/" component={Home} />
 					{/* <ProtectedAdminRoute path='/staff' component={Staff} /> */}
-					<ProtectedStaffRoute path='/staff' component={Staff} />
-					<ProtectedTeacherRoute path='/teacher' component={Teacher} />
-					<ProtectedStudentRoute path='/student' component={Student} />
+					<ProtectedStaffRoute path="/staff" component={Staff} />
+					<ProtectedTeacherRoute path="/teacher" component={Teacher} />
+					<ProtectedStudentRoute path="/student" component={Student} />
 					<Route component={NotFound} />
 				</Switch>
 			</Router>

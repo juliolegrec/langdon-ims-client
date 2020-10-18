@@ -125,10 +125,9 @@ export default function SchoolInfo() {
 				<LoadingImage>
 					<img
 						style={{ position: 'absolute' }}
-						src='https://res.cloudinary.com/imperium/image/upload/v1581344084/loading-spinner.gif'
-						alt='loading'
+						src="https://res.cloudinary.com/imperium/image/upload/v1581344084/loading-spinner.gif"
+						alt="loading"
 					/>
-					)
 				</LoadingImage>
 			) : (
 				''
@@ -162,7 +161,7 @@ export default function SchoolInfo() {
 					<label>
 						Name:
 						<input
-							type='text'
+							type="text"
 							value={schoolDetails.name || ''}
 							onChange={(e) =>
 								setSchoolDetails({ ...schoolDetails, name: e.target.value })
@@ -172,7 +171,7 @@ export default function SchoolInfo() {
 					<label>
 						Address:
 						<input
-							type='text'
+							type="text"
 							value={schoolDetails.streetAddress || ''}
 							onChange={(e) =>
 								setSchoolDetails({
@@ -185,7 +184,7 @@ export default function SchoolInfo() {
 					<label>
 						Phone Number:
 						<input
-							type='text'
+							type="text"
 							value={schoolDetails.telephoneNumber || ''}
 							onChange={(e) =>
 								setSchoolDetails({
@@ -198,7 +197,7 @@ export default function SchoolInfo() {
 					<label>
 						Email Address:
 						<input
-							type='text'
+							type="text"
 							value={schoolDetails.emailAddress || ''}
 							onChange={(e) =>
 								setSchoolDetails({
@@ -211,7 +210,7 @@ export default function SchoolInfo() {
 					<label>
 						Website:
 						<input
-							type='text'
+							type="text"
 							value={schoolDetails.website || ''}
 							onChange={(e) =>
 								setSchoolDetails({ ...schoolDetails, website: e.target.value })
@@ -233,7 +232,7 @@ export default function SchoolInfo() {
 							<option value='NUMBER'>Number</option>
 						</select>
 					</label> */}
-					<button type='submit'>Save</button>
+					<button type="submit">Save</button>
 				</SettingsFormStyled>
 			</div>
 		</StyledMain>
