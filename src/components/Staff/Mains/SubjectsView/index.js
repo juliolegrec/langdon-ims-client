@@ -75,7 +75,7 @@ const StyledSubjectForm = styled.div`
 function SubjectsView(props) {
 	const [newSubjectInfo, setNewSubjectInfo] = useState({});
 	const [selectedRowID, setSelectedRowID] = useState('');
-	const [open, setOpen] = useState(false);
+	const [openDelete, setOpenDelete] = useState(false);
 
 	const pageTitle = 'Subjects View';
 
@@ -109,12 +109,12 @@ function SubjectsView(props) {
 		}
 	`;
 
-	const handleOpen = () => {
-		setOpen(true);
+	const handleOpenDelete = () => {
+		setOpenDelete(true);
 	};
 
-	const handleClose = () => {
-		setOpen(false);
+	const handleCloseDelete = () => {
+		setOpenDelete(false);
 	};
 
 	const {
@@ -224,6 +224,10 @@ function SubjectsView(props) {
 										'id'
 									)}`
 								);
+								// setSelectedRowID(
+								// 	e.target.parentNode.parentNode.getAttribute('id')
+								// );
+								// handleOpenEdit();
 							}}
 						>
 							EDIT
@@ -233,7 +237,7 @@ function SubjectsView(props) {
 								setSelectedRowID(
 									e.target.parentNode.parentNode.getAttribute('id')
 								);
-								handleOpen();
+								handleOpenDelete();
 								console.log(e.target.parentNode.parentNode);
 							}}
 						>
@@ -295,7 +299,6 @@ function SubjectsView(props) {
 						<label>
 							Teacher<span>(Control + click to select multiples)</span>:
 							<select
-								required
 								onChange={(e) => {
 									let selectedOpts = [...e.target.options]
 										.filter((x) => x.selected)
@@ -316,21 +319,21 @@ function SubjectsView(props) {
 					</form>
 				</StyledSubjectForm>
 				{displayTable()}
-				<Modal open={open} onClose={handleClose}>
+				<Modal open={openDelete} onClose={handleCloseDelete}>
 					<StyledModal>
-						<h3>Are you sure you want to delete this class?</h3>
+						<h3>Are you sure you want to delete this subject?</h3>
 						<div className='btn'>
 							<button
 								onClick={() => {
 									deleteSubject();
 									window.location.reload(true);
-									handleClose();
+									handleCloseDelete();
 									console.log(selectedRowID);
 								}}
 							>
 								Yes
 							</button>
-							<button onClick={handleClose}>No</button>
+							<button onClick={handleCloseDelete}>No</button>
 						</div>
 					</StyledModal>
 				</Modal>

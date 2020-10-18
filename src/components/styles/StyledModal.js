@@ -6,11 +6,30 @@ const StyledModal = styled.div`
 	position: absolute;
 	top: 50%;
 	left: 50%;
+	padding: 0 10px;
 	transform: translate(-25%, -50%);
 
 	h3 {
 		margin-top: 15px;
 		text-align: center;
+	}
+
+	form {
+		width: 100%;
+		margin: 10px 10px 0;
+		display: grid;
+		grid-template-columns: 1fr;
+
+		label {
+			display: grid;
+			grid-template-columns: 30% 60%;
+			grid-gap: 5px;
+			height: 30px;
+			margin-bottom: 10px;
+		}
+		input {
+			/* width: 100%; */
+		}
 	}
 
 	.btn {

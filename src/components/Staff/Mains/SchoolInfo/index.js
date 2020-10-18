@@ -125,8 +125,8 @@ export default function SchoolInfo() {
 				<LoadingImage>
 					<img
 						style={{ position: 'absolute' }}
-						src="https://res.cloudinary.com/imperium/image/upload/v1581344084/loading-spinner.gif"
-						alt="loading"
+						src='https://res.cloudinary.com/imperium/image/upload/v1581344084/loading-spinner.gif'
+						alt='loading'
 					/>
 				</LoadingImage>
 			) : (
@@ -148,30 +148,21 @@ export default function SchoolInfo() {
 						setLoadingActive(true);
 					}}
 				>
-					{/* <img
-					src={
-						data && data.schoolInfo
-							? data.schoolInfo.logo
-							: 'https://via.placeholder.com/150'
-					}
-					alt='School logo'
-					width='150'
-				/> */}
-
 					<label>
-						Name:
+						Name <span style={{ color: 'red' }}>*</span>:
 						<input
-							type="text"
+							type='text'
 							value={schoolDetails.name || ''}
 							onChange={(e) =>
 								setSchoolDetails({ ...schoolDetails, name: e.target.value })
 							}
+							required
 						/>
 					</label>
 					<label>
 						Address:
 						<input
-							type="text"
+							type='text'
 							value={schoolDetails.streetAddress || ''}
 							onChange={(e) =>
 								setSchoolDetails({
@@ -184,7 +175,7 @@ export default function SchoolInfo() {
 					<label>
 						Phone Number:
 						<input
-							type="text"
+							type='text'
 							value={schoolDetails.telephoneNumber || ''}
 							onChange={(e) =>
 								setSchoolDetails({
@@ -197,7 +188,7 @@ export default function SchoolInfo() {
 					<label>
 						Email Address:
 						<input
-							type="text"
+							type='text'
 							value={schoolDetails.emailAddress || ''}
 							onChange={(e) =>
 								setSchoolDetails({
@@ -210,30 +201,30 @@ export default function SchoolInfo() {
 					<label>
 						Website:
 						<input
-							type="text"
+							type='text'
 							value={schoolDetails.website || ''}
 							onChange={(e) =>
 								setSchoolDetails({ ...schoolDetails, website: e.target.value })
 							}
 						/>
 					</label>
-					{/* <label>
-						Marking System:
-						<select
-							value={schoolDetails.markingSystem || ''}
-							onChange={(e) =>
-								setSchoolDetails({
-									...schoolDetails,
-									markingSystem: e.target.value,
-								})
-							}
-						>
-							<option value='GRADE'>Grade</option>
-							<option value='NUMBER'>Number</option>
-						</select>
-					</label> */}
-					<button type="submit">Save</button>
+
+					<button type='submit'>Save</button>
 				</SettingsFormStyled>
+			</div>
+			<div>
+				<span
+					style={{
+						position: 'absolute',
+						left: '5px',
+						bottom: '5px',
+						fontSize: '0.75rem',
+						color: 'red',
+					}}
+				>
+					*
+				</span>{' '}
+				= required fields
 			</div>
 		</StyledMain>
 	);
