@@ -165,6 +165,7 @@ function ClassesView(props) {
 							{/* <th>Number of Students</th> */}
 							<th>Capacity</th>
 							<th>Teacher in Charge</th>
+							{/* <th>Actions</th> */}
 						</tr>
 					</thead>
 					<tbody>{displayClasses()}</tbody>

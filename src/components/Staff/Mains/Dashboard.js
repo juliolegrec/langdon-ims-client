@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { gql } from 'apollo-boost';
 import { useQuery } from 'react-apollo';
 import DashboardMainStyled from '../styles/DashBoardMainStyled';
@@ -7,6 +7,14 @@ import moment from 'moment';
 import '../styles/CalendarStyles.css';
 
 export default function Dashboard() {
+	const [examDisplay, setExamDisplay] = useState(false)
+
+	useEffect(() => {
+		setTimeout(() => {
+			setExamDisplay(true)
+		}, 1500);
+	})
+
 	const GET_ACTIVE_STU_TEA_COUNT = gql`
 		{
 			totalStudents
@@ -138,6 +146,8 @@ export default function Dashboard() {
 			</section>
 			<section className="exams-calendar">
 				<h3>Exams</h3>
+				{
+					examDisplay ?
 				<ul>
 					<li>
 						<strong>1st term:</strong> 1st April 2019 to 12th April 2019
@@ -148,7 +158,8 @@ export default function Dashboard() {
 					<li>
 						<strong>3rd term:</strong> 20th October 2019 to 31st October 2019
 					</li>
-				</ul>
+				</ul> : ""
+				}
 			</section>
 		</DashboardMainStyled>
 	);

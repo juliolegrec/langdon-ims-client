@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const PersonViewStyled = styled.div`
 	margin: 35px auto 25px;
-	max-width: 80%;
+	max-width: 60%;
 	/* max-width: 1000px; */
 	background-color: white;
 	padding: 30px 20px;

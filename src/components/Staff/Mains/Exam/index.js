@@ -24,9 +24,10 @@ const FilterHeaderStyled = styled.div`
 		width: 100%;
 		label {
 			width: 100%;
+			margin: 0 10px;
 
 			select {
-				width: 90%;
+				width: 100%;
 				height: 75%;
 				border: 1px solid #ddd;
 				border-radius: 0.25rem;
@@ -131,6 +132,12 @@ export default function Exams(props) {
 	const handleClose = () => {
 		setOpen(false);
 	};
+
+	const resetFilters = () => {
+		setselectedTerm();
+		setSelectedClass();
+		setSelectedSubject();
+	}
 
 	const [deleteExam] = useMutation(DELETE_EXAM);
 
@@ -336,7 +343,7 @@ export default function Exams(props) {
 				</TitleStyled>
 				<h2>{pageTitle}</h2>
 				<FilterHeaderStyled>
-					<form>
+					<form onSubmit={e => e.preventDefault()}>
 						<label>
 							<select onChange={(e) => setselectedTerm(e.target.value)}>
 								<option value='undefined'>Select Term...</option>
@@ -355,6 +362,17 @@ export default function Exams(props) {
 								{filterSubject()}
 							</select>
 						</label>
+						<button
+							style={{
+								background: "transparent",
+								color: "#106BD6",
+								fontWeight: "normal",
+								fontSize: "0.85rem"
+							}}
+							onClick={resetFilters}
+						>
+							Clear Filters
+						</button>
 						<button onClick={() => newExam()}>+ Add</button>
 					</form>
 				</FilterHeaderStyled>

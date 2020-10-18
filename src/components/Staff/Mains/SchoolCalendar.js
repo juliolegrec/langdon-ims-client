@@ -146,7 +146,6 @@ function SchoolCalendar(props) {
 			return (
 				<tr id={schoolTerm._id} key={schoolTerm._id}>
 					<td>{schoolTerm.termName}</td>
-					{/* <td>{schoolTerm.beginDate}</td> */}
 					<td data-begindate={schoolTerm.beginDate}>
 						{moment(schoolTerm.beginDate).format('Do MMMM YYYY')}
 					</td>
@@ -205,8 +204,10 @@ function SchoolCalendar(props) {
 
 	const [updateSchoolTerm] = useMutation(UPDATE_SCHOOL_TERM, {
 		onCompleted: () => {
-			setLoadingActive(false);
-			window.location.reload();
+			// setLoadingActive(false);
+			// setTimeout(() => {
+				window.location.reload();
+			// }, 3000);
 		},
 	});
 
@@ -376,7 +377,7 @@ function SchoolCalendar(props) {
 							style={{ background: '#2ecc71' }}
 							onClick={() => {
 								updateSchoolTerm();
-								window.location.reload(true);
+								// window.location.reload(true);
 								handleCloseEdit();
 								setLoadingActive(true);
 								console.log(selectedRowID);

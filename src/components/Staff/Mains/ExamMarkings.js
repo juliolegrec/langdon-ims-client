@@ -416,7 +416,6 @@ export default function ExamMarkings() {
 							src='https://res.cloudinary.com/imperium/image/upload/v1581344084/loading-spinner.gif'
 							alt='loading'
 						/>
-						)
 					</LoadingImage>
 				) : (
 					''
