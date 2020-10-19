@@ -7,6 +7,21 @@ import { useDispatch } from 'redux-react-hook';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../constants/actions_types';
 import HomeStyled from './styles/StyledHome';
+import styled from 'styled-components'
+
+const LoadingImage = styled.div`
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: white;
+	display: flex;
+	justify-content: center;
+	opacity: 0.75;
+
+	img {
+		margin-top: 75px;
+	}
+`;
 
 function Login(props) {
 	const [username, setUsername] = useState('');
@@ -28,7 +43,16 @@ function Login(props) {
 	);
 
 	if (loadingLogo) {
-		return 'Loading...';
+		// return 'Loading Test';
+		return (
+			<LoadingImage>
+					<img
+						style={{ position: 'absolute' }}
+						src='https://res.cloudinary.com/imperium/image/upload/v1581344084/loading-spinner.gif'
+						alt='loading'
+					/>
+				</LoadingImage>
+		)
 	}
 	if (errorLogo) {
 		return 'Error!';
