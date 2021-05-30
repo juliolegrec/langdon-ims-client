@@ -7,7 +7,7 @@ import { useDispatch } from 'redux-react-hook';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../constants/actions_types';
 import HomeStyled from './styles/StyledHome';
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const LoadingImage = styled.div`
 	position: absolute;
@@ -38,21 +38,23 @@ function Login(props) {
 		}
 	`;
 
-	const { loading: loadingLogo, error: errorLogo, data: dataLogo } = useQuery(
-		GET_SCHOOL_LOGO
-	);
+	const {
+		loading: loadingLogo,
+		error: errorLogo,
+		data: dataLogo,
+	} = useQuery(GET_SCHOOL_LOGO);
 
 	if (loadingLogo) {
 		// return 'Loading Test';
 		return (
 			<LoadingImage>
-					<img
-						style={{ position: 'absolute' }}
-						src='https://res.cloudinary.com/imperium/image/upload/v1581344084/loading-spinner.gif'
-						alt='loading'
-					/>
-				</LoadingImage>
-		)
+				<img
+					style={{ position: 'absolute' }}
+					src="https://res.cloudinary.com/imperium/image/upload/v1581344084/loading-spinner.gif"
+					alt="loading"
+				/>
+			</LoadingImage>
+		);
 	}
 	if (errorLogo) {
 		return 'Error!';
@@ -80,14 +82,14 @@ function Login(props) {
 			`,
 		};
 
-		const { data } = await axios.post(
-			'https://langdon-ims-server.herokuapp.com/graphql',
-			requestBody
-		);
 		// const { data } = await axios.post(
-		// 	'http://localhost:5000/graphql',
+		// 	'https://langdon-ims-server.herokuapp.com/graphql',
 		// 	requestBody
 		// );
+		const { data } = await axios.post(
+			'http://localhost:5000/graphql',
+			requestBody
+		);
 
 		if (data.errors) {
 			setError(data.errors[0].message);
@@ -130,6 +132,7 @@ function Login(props) {
 	return (
 		<HomeStyled className="home">
 			<img src={logo} className="App-logo" alt="logo" />
+			{/* <img src="../../ASSETS/LOGOS/logo.png" className="App-logo" alt="logo" /> */}
 			<div className="login-form">
 				<h1>Login</h1>
 				<form onSubmit={login}>
